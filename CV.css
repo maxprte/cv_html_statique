@@ -1,81 +1,40 @@
-/* Import de la police (peut aussi être fait dans le HTML) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
-
-/* Application de la police et du fond */
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: #f8f9fa; /* Gris très clair */
-  color: #343a40;
-  line-height: 1.7;
+:root {
+  --primary-color: #0d6efd;
+  --secondary-color: #6610f2;
+  --dark-bg: #1a1d29;
+  --card-bg: #ffffff;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --cursor-color: #764ba2;
 }
 
-/* Styles pour les titres */
-h1, h2, h3, h4, h5, h6, .navbar-brand {
-  font-weight: 700;
-}
+/* Curseur personnalisé */
+body { cursor: none; font-family: 'Segoe UI', sans-serif; line-height: 1.6; background: linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%); min-height:100vh; color:var(--text-primary);}
+.custom-cursor-dot { width:8px;height:8px;background-color:var(--cursor-color);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;mix-blend-mode:difference;transform:translate(-50%,-50%);transition:transform 0.05s ease-out;}
+.custom-cursor-outline { width:30px;height:30px;border:2px solid var(--cursor-color);border-radius:50%;pointer-events:none;position:fixed;z-index:9998;transform:translate(-50%,-50%);transition:all 0.15s ease-out, background-color 0.2s;}
+.custom-cursor-outline.hover-target { transform: translate(-50%, -50%) scale(1.5); border-color: #fff; background-color: var(--cursor-color); mix-blend-mode: normal; }
+.custom-cursor-dot.hover-target { transform: translate(-50%, -50%) scale(0); }
+@media (max-width:992px) { .custom-cursor-dot, .custom-cursor-outline { display:none; } body { cursor:auto; } }
 
-/* En-tête simple et propre */
-header {
-  background-color: #ffffff;
-  border-bottom: 1px solid #e9ecef;
-}
+/* Header */
+header { background: linear-gradient(135deg,#667eea 0%,#764ba2 100%); color:#fff; padding:5rem 1rem 4rem; position:relative; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.2);}
+header::before { content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%; background:radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); background-size:50px 50px; animation: moveBackground 20s linear infinite;}
+@keyframes moveBackground { 0%{transform:translate(0,0);} 100%{transform:translate(50px,50px);} }
+header h1 { font-size:3rem; font-weight:700; text-shadow:2px 2px 4px rgba(0,0,0,0.3); animation:fadeInDown 0.8s ease-out; }
+header p { font-size:1.3rem; margin-top:0.5rem; animation:fadeInUp 0.8s ease-out 0.2s both; }
+@keyframes fadeInDown { from{opacity:0; transform:translateY(-30px);} to{opacity:1; transform:translateY(0);} }
+@keyframes fadeInUp { from{opacity:0; transform:translateY(30px);} to{opacity:1; transform:translateY(0);} }
 
-/* Style pour les titres de section */
-.section-title {
-  font-weight: 700;
-  margin-bottom: 2rem;
-  color: var(--bs-primary);
-  border-bottom: 2px solid var(--bs-primary);
-  display: inline-block;
-  padding-bottom: 0.5rem;
-}
+/* Boutons personnalisés */
+.btn-primary-custom { background: linear-gradient(135deg,#667eea 0%,#764ba2 100%); border:none; padding:12px 30px; border-radius:50px; font-weight:600; transition:all 0.3s ease; box-shadow:0 4px 15px rgba(102,126,234,0.4);}
+.btn-primary-custom:hover { transform:translateY(-3px); box-shadow:0 6px 20px rgba(102,126,234,0.6); }
 
-/* Cartes (cards) */
-.card {
-  border: none;
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
+/* Navbar */
+.navbar { backdrop-filter:blur(10px); background-color:rgba(255,255,255,0.95)!important; box-shadow:0 2px 20px rgba(0,0,0,0.1);}
+.navbar-brand { font-weight:700; color:var(--primary-color)!important; font-size:1.3rem; }
+.nav-link { font-weight:500; transition:all 0.3s ease; position:relative; padding:0.5rem 1rem !important;}
+.nav-link::after { content:''; position:absolute; bottom:0; left:50%; width:0; height:2px; background:var(--primary-color); transition:all 0.3s ease; transform:translateX(-50%); }
+.nav-link:hover::after { width:80%; }
 
-/* Effet de survol subtil sur les cartes */
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-}
-
-/* Accordéon */
-.accordion-item {
-  border: none;
-  margin-bottom: 0.5rem;
-  border-radius: 0.75rem;
-  overflow: hidden; /* Important pour les coins arrondis */
-}
-
-.accordion-button {
-  font-weight: 500;
-}
-
-.accordion-button:not(.collapsed) {
-  background-color: var(--bs-primary);
-  color: white;
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.13);
-}
-
-/* Supprime l'ombre moche au focus */
-.accordion-button:focus {
-  box-shadow: none;
-  border-color: transparent;
-}
-
-/* Classe pour l'animation JS */
-.fade-in-section {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.fade-in-section.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* Sections, Cards, Badges, Progress, etc. */
+/* ... (Tu peux copier tout ton CSS restant ici depuis ton fichier original) ... */

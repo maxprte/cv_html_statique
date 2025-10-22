@@ -1,42 +1,52 @@
-/**
- * Animation d'apparition au défilement (Fade-in on Scroll)
- *
- * Utilise IntersectionObserver pour détecter quand un élément
- * entre dans la fenêtre et lui ajoute une classe CSS.
- */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
 
-  // 1. Sélectionner tous les éléments à animer
-  const sections = document.querySelectorAll('.fade-in-section');
-
-  // 2. Définir les options de l'observateur
-  // threshold: 0.1 signifie que l'animation se déclenche
-  // dès que 10% de l'élément est visible.
-  const observerOptions = {
-    root: null, // Observe par rapport au viewport
-    rootMargin: '0px',
-    threshold: 0.1
-  };
-
-  // 3. Créer la fonction de callback (ce qui se passe)
-  const observerCallback = (entries, observer) => {
+  // Animation des sections au scroll
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      // Si l'élément est visible
-      if (entry.isIntersecting) {
-        // Ajouter la classe qui déclenche l'animation CSS
-        entry.target.classList.add('is-visible');
-        
-        // Cesser d'observer cet élément (l'animation ne se joue qu'une fois)
-        observer.unobserve(entry.target);
+      if(entry.isIntersecting){
+        entry.target.style.animation = 'fadeIn 0.6s ease-out';
       }
     });
-  };
+  }, { threshold: 0.1 });
+  document.querySelectorAll('section').forEach(section => observer.observe(section));
 
-  // 4. Créer et attacher l'observateur
-  const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-  sections.forEach(section => {
-    observer.observe(section);
+  // Animation des barres de progression
+  document.querySelectorAll('.progress-bar').forEach(bar => {
+    const width = bar.style.width;
+    bar.style.width = '0';
+    setTimeout(() => { bar.style.width = width; }, 300);
   });
+
+  // Curseur personnalisé
+  const cursorDot = document.querySelector('.custom-cursor-dot');
+  const cursorOutline = document.querySelector('.custom-cursor-outline');
+  const interactiveElements = 'a, button, .accordion-button, .card, .nav-link, .list-group-item, .badge';
+
+  if(cursorDot && cursorOutline){
+    let mouseX=0, mouseY=0, dotX=0, dotY=0, outlineX=0, outlineY=0;
+    const speedDot=0.05, speedOutline=0.15;
+
+    window.addEventListener('mousemove', e => { mouseX=e.clientX; mouseY=e.clientY; });
+
+    function animateCursor(){
+      dotX+=(mouseX-dotX)*speedDot;
+      dotY+=(mouseY-dotY)*speedDot;
+      cursorDot.style.left=`${dotX}px`;
+      cursorDot.style.top=`${dotY}px`;
+
+      outlineX+=(mouseX-outlineX)*speedOutline;
+      outlineY+=(mouseY-outlineY)*speedOutline;
+      cursorOutline.style.left=`${outlineX}px`;
+      cursorOutline.style.top=`${outlineY}px`;
+
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    document.querySelectorAll(interactiveElements).forEach(el=>{
+      el.addEventListener('mouseenter',()=>{ cursorOutline.classList.add('hover-target'); cursorDot.classList.add('hover-target'); });
+      el.addEventListener('mouseleave',()=>{ cursorOutline.classList.remove('hover-target'); cursorDot.classList.remove('hover-target'); });
+    });
+  }
 
 });

@@ -7,92 +7,33 @@
   <meta name="keywords" content="CV, BTS SIO, Informatique, Réseaux, Linux, Windows, Cisco, Fortinet">
   <meta name="author" content="Max Porte">
   <title>CV en ligne - Max Porte</title>
+  
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-  <style>
-    body {
-      font-family: system-ui, sans-serif;
-      line-height: 1.6;
-      scroll-behavior: smooth;
-      background-color: #f8f9fa;
-    }
-    header {
-      background: linear-gradient(135deg, #0d6efd, #6610f2);
-      color: #fff;
-      text-align: center;
-      padding: 4rem 1rem;
-      border-radius: 0 0 15px 15px;
-    }
-    header h1 {
-      font-size: 2.5rem;
-      font-weight: bold;
-    }
-    header p {
-      font-size: 1.2rem;
-      margin-top: .5rem;
-    }
-    section {
-      padding: 3rem 1rem;
-    }
-    .card {
-      border: none;
-      border-radius: 15px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      margin-bottom: 1rem;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    }
-    .accordion-button {
-      font-weight: 600;
-    }
-    .accordion-button:not(.collapsed) {
-      background-color: #f8f9fa;
-      color: #0d6efd;
-    }
-    .badge {
-      font-size: 0.9rem;
-      padding: 0.5em;
-      margin-right: 0.3rem;
-      margin-bottom: 0.3rem;
-    }
-    .progress {
-      height: 20px;
-      border-radius: 10px;
-      margin-bottom: 0.5rem;
-    }
-    footer {
-      background-color: #0d6efd;
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
-      margin-top: 2rem;
-      border-radius: 15px 15px 0 0;
-    }
-    .section-title {
-      color: #0d6efd;
-      border-bottom: 2px solid #0d6efd;
-      padding-bottom: 0.5rem;
-      margin-bottom: 1.5rem;
-    }
-  </style>
+
+  <!-- CSS personnalisé -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  
+  <!-- Curseur personnalisé -->
+  <div class="custom-cursor-dot"></div>
+  <div class="custom-cursor-outline"></div>
+
   <!-- Header -->
-  <header class="mb-5">
+  <header class="mb-5 text-center">
     <h1>Max Porte</h1>
     <p>Étudiant en BTS SIO SISR - Alternance</p>
-    <a href="#contact" class="btn btn-light btn-lg mt-3"><i class="bi bi-envelope me-2"></i>Me Contacter</a>
+    <a href="#contact" class="btn btn-light btn-lg btn-primary-custom mt-3">
+      <i class="bi bi-envelope me-2"></i>Me Contacter
+    </a>
   </header>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm mb-4">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm mb-4">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="#">CV Max Porte</a>
+      <a class="navbar-brand fw-bold" href="#"><i class="bi bi-person-badge me-2"></i>CV Max Porte</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -108,190 +49,21 @@
     </div>
   </nav>
 
+  <!-- Main Content -->
   <main class="container">
-    <!-- Formation -->
-    <section id="formation">
-      <h2 class="section-title"><i class="bi bi-mortarboard-fill me-2"></i>Formation</h2>
-      <div class="card p-3 mb-3">
-        <h3 class="h5">BTS SIO SISR</h3>
-        <p class="mb-1"><strong>CFAI UIMM Loire Drôme Ardèche</strong></p>
-        <p class="text-muted">2025 - en cours (alternance chez Yesss Electrique)</p>
-      </div>
-      <div class="card p-3 mb-3">
-        <h3 class="h5">Bac Professionnel Systèmes Numériques (option RISC)</h3>
-        <p class="mb-1"><strong>Lycée Le Marais Sainte Thérèse</strong></p>
-        <p class="text-muted">2022 - 2025 (mention Bien, 15.64/20)</p>
-      </div>
-    </section>
-
-    <!-- Expériences -->
-    <section id="experience">
-      <h2 class="section-title"><i class="bi bi-briefcase-fill me-2"></i>Expériences professionnelles</h2>
-      <div class="accordion" id="expAccordion">
-        <!-- Alternance -->
-        <div class="accordion-item mb-2">
-          <h3 class="accordion-header" id="exp1">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#exp1Content">
-              Alternance - Technicien Réseaux @ Yesss Electrique
-            </button>
-          </h3>
-          <div id="exp1Content" class="accordion-collapse collapse show" data-bs-parent="#expAccordion">
-            <div class="accordion-body">
-              <strong>Depuis 08/2025</strong><br>
-              Support informatique, gestion des réseaux, déploiement matériel, maintenance.
-            </div>
-          </div>
-        </div>
-        <!-- Stages -->
-        <div class="accordion-item">
-          <h3 class="accordion-header" id="exp2">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#exp2Content">
-              Stages (2022 - 2025)
-            </button>
-          </h3>
-          <div id="exp2Content" class="accordion-collapse collapse" data-bs-parent="#expAccordion">
-            <div class="accordion-body">
-              <!-- Accordéon imbriqué pour les stages -->
-              <div class="accordion" id="stagesAccordion">
-                <div class="accordion-item">
-                  <h4 class="accordion-header" id="stage1">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stage1Content">
-                      SDIS42 (12/2024)
-                    </button>
-                  </h4>
-                  <div id="stage1Content" class="accordion-collapse collapse" data-bs-parent="#stagesAccordion">
-                    <div class="accordion-body">
-                      Déploiement BIP, mise à jour firmware firewall Fortinet.
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h4 class="accordion-header" id="stage2">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stage2Content">
-                      Abicom (04/2024 - 05/2024)
-                    </button>
-                  </h4>
-                  <div id="stage2Content" class="accordion-collapse collapse" data-bs-parent="#stagesAccordion">
-                    <div class="accordion-body">
-                      Support informatique, maintenance réseau, migration de boîtes mail.
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h4 class="accordion-header" id="stage3">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stage3Content">
-                      CRS Informatique (11/2023)
-                    </button>
-                  </h4>
-                  <div id="stage3Content" class="accordion-collapse collapse" data-bs-parent="#stagesAccordion">
-                    <div class="accordion-body">
-                      Création Active Directory, GPO, dossiers partagés.
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h4 class="accordion-header" id="stage4">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stage4Content">
-                      SPS (06/2023)
-                    </button>
-                  </h4>
-                  <div id="stage4Content" class="accordion-collapse collapse" data-bs-parent="#stagesAccordion">
-                    <div class="accordion-body">
-                      Câblage basse tension, installation d'alarmes et vidéo surveillance.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Compétences -->
-    <section id="competences">
-      <h2 class="section-title"><i class="bi bi-lightbulb-fill me-2"></i>Compétences</h2>
-      <div class="row">
-        <div class="col-md-6">
-          <h4>Systèmes</h4>
-          <div class="mb-3">
-            <span class="badge bg-primary">Linux (Ubuntu Server)</span>
-            <span class="badge bg-primary">Windows 10/11</span>
-          </div>
-          <h4 class="mt-4">Réseaux</h4>
-          <div class="mb-3">
-            <span class="badge bg-success">Cisco (VLAN, Routage)</span>
-            <span class="badge bg-success">Firewall Fortinet</span>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <h4>Outils & Méthodes</h4>
-          <div class="mb-3">
-            <div class="progress">
-              <div class="progress-bar bg-info" style="width: 90%">Active Directory</div>
-            </div>
-            <div class="progress mt-2">
-              <div class="progress-bar bg-warning" style="width: 85%">GPO</div>
-            </div>
-            <div class="progress mt-2">
-              <div class="progress-bar bg-danger" style="width: 80%">Maintenance</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Centres d'intérêt -->
-    <section id="interets">
-      <h2 class="section-title"><i class="bi bi-heart-fill me-2"></i>Centres d'intérêt</h2>
-      <div class="row">
-        <div class="col-md-6">
-          <ul class="list-group">
-            <li class="list-group-item d-flex align-items-center">
-              <i class="bi bi-pc-display me-2"></i> Informatique
-            </li>
-            <li class="list-group-item d-flex align-items-center">
-              <i class="bi bi-music-note-beamed me-2"></i> Musique
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-6">
-          <ul class="list-group">
-            <li class="list-group-item d-flex align-items-center">
-              <i class="bi bi-tools me-2"></i> Mécanique auto
-            </li>
-            <li class="list-group-item d-flex align-items-center">
-              <i class="bi bi-controller me-2"></i> Sport
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="text-center mb-5">
-      <h2 class="section-title"><i class="bi bi-envelope-fill me-2"></i>Contact</h2>
-      <p>
-        <a href="mailto:max.porte1234@gmail.com" class="btn btn-outline-primary me-2">
-          <i class="bi bi-envelope me-1"></i>Envoyer un email
-        </a>
-        <a href="path/vers/ton-cv.pdf" class="btn btn-outline-danger" download>
-          <i class="bi bi-file-earmark-pdf me-1"></i>Télécharger mon CV
-        </a>
-      </p>
-      <p class="mt-3">
-        Retrouvez-moi sur GitHub :
-        <a href="https://github.com/maxprte" target="_blank" rel="noopener noreferrer" class="fw-bold">@maxprte</a>
-      </p>
-    </section>
+    <!-- Sections Formation, Expérience, Compétences, Intérêts, Contact -->
+    <!-- ... (copier le contenu HTML des sections depuis ton code actuel) ... -->
   </main>
 
   <!-- Footer -->
-  <footer>
-    <p class="mb-0">© 2025 Max Porte - CV en ligne</p>
+  <footer class="text-center">
+    <p class="mb-0 fs-5">© 2025 Max Porte - CV en ligne</p>
+    <p class="mt-2 opacity-75">Fait avec <i class="bi bi-heart-fill text-danger"></i> et Bootstrap</p>
   </footer>
 
-  <!-- Bootstrap JS -->
+  <!-- JS Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- JS personnalisé -->
+  <script src="script.js"></script>
 </body>
 </html>
