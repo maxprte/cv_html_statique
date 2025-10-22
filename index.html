@@ -34,31 +34,30 @@
             color: var(--text-primary);
         }
         
-        /* Le 'dot' principal (suit la souris avec un léger délai) */
+        /* Le 'dot' principal (losange réactif) */
         .custom-cursor-dot {
-            width: 10px; /* Légèrement plus grand */
+            width: 10px; 
             height: 10px;
             background-color: var(--cursor-color);
-            border-radius: 2px; /* Carré avec bords légèrement arrondis */
+            border-radius: 2px; 
             pointer-events: none;
             position: fixed;
             z-index: 9999;
-            /* mix-blend-mode: difference; */ /* Retiré pour plus de contrôle */
-            transform: translate(-50%, -50%) rotate(45deg); /* Tourné à 45° (losange) */
+            transform: translate(-50%, -50%) rotate(45deg); 
             transition: transform 0.05s ease-out, background-color 0.2s;
         }
 
         /* Le 'outline' qui réagit aux éléments interactifs */
         .custom-cursor-outline {
-            width: 36px; /* Légèrement plus grand */
+            width: 36px; 
             height: 36px;
-            border: 1px solid var(--cursor-color); /* Bordure plus fine */
+            border: 1px solid var(--cursor-color); 
             border-radius: 50%;
             pointer-events: none;
             position: fixed;
             z-index: 9998;
             transform: translate(-50%, -50%);
-            transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Courbe d'animation plus fluide */
+            transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
         }
 
         /* Styles pour les éléments interactifs (boutons, liens, etc.) */
@@ -68,17 +67,17 @@
 
         /* Effet sur l'outline lorsque la souris est sur un élément interactif */
         .custom-cursor-outline.hover-target {
-            transform: translate(-50%, -50%) scale(1.1); /* Agrandissement subtil */
-            border-width: 3px; /* Épaississement de la bordure */
+            transform: translate(-50%, -50%) scale(1.1); 
+            border-width: 3px; 
             border-color: var(--primary-color); 
-            background-color: rgba(118, 75, 162, 0.1); /* Remplissage léger */
+            background-color: rgba(118, 75, 162, 0.1); 
         }
         
-        /* Effet sur le dot lorsque la souris est sur un élément interactif */
+        /* Effet sur le dot lorsque la souris est sur un élément interactif (devient un petit carré) */
         .custom-cursor-dot.hover-target {
             background-color: var(--primary-color);
-            transform: translate(-50%, -50%) rotate(0deg) scale(0.6); /* Reviens à une croix */
-            border-radius: 0; /* Pour un effet de croix */
+            transform: translate(-50%, -50%) rotate(0deg) scale(0.6); 
+            border-radius: 0; 
         }
         
         /* Masquer le curseur sur mobile pour éviter les bugs */
@@ -98,7 +97,7 @@
         FIN DU STYLE DU CURSEUR PERSONNALISÉ
         ======================================
         */
-        /* ... Le reste de votre CSS (inchangé) ... */
+
         * {
             margin: 0;
             padding: 0;
@@ -211,7 +210,7 @@
 
         section {
             padding: 4rem 1rem;
-            animation: fadeIn 0.6s ease-out;
+            /* L'animation est gérée par JS pour un déclenchement au scroll */
         }
 
         @keyframes fadeIn {
@@ -650,7 +649,37 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Animation des sections au scroll (inchangée)
+            
+            // =======================================
+            // CORRECTION DES LIENS D'ANCRE ET DÉFILEMENT FLUIDE 🖱️
+            // =======================================
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    // Empêche le défilement par défaut uniquement pour les ancres valides
+                    if (this.getAttribute('href') === '#') return;
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        e.preventDefault(); // Empêche l'action par défaut du lien
+
+                        // Définit un offset pour la barre de navigation sticky (si elle existe)
+                        const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 0;
+                        
+                        // Défilement en douceur vers la cible en tenant compte de la navbar
+                        window.scrollTo({
+                            top: targetElement.offsetTop - navbarHeight,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            // =======================================
+            // FIN DE LA CORRECTION
+            // =======================================
+
+            // Animation des sections au scroll
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -663,7 +692,7 @@
                 observer.observe(section);
             });
 
-            // Animation des barres de progression (inchangée)
+            // Animation des barres de progression
             document.querySelectorAll('.progress-bar').forEach(bar => {
                 const width = bar.style.width;
                 bar.style.width = '0';
@@ -686,8 +715,8 @@
                 let dotY = 0;
                 let outlineX = 0;
                 let outlineY = 0;
-                const speedDot = 0.15; // Augmenté la vitesse du dot pour le rendre plus réactif
-                const speedOutline = 0.1; // Diminué la vitesse de l'outline pour un meilleur effet de traîne
+                const speedDot = 0.15; // Vitesse rapide pour le point
+                const speedOutline = 0.1; // Vitesse lente pour l'outline (traîne)
 
                 // 1. Mettre à jour la position de la souris
                 window.addEventListener('mousemove', (e) => {
@@ -714,7 +743,7 @@
 
                 animateCursor();
 
-                // 3. Gérer les interactions (hover) (inchangé)
+                // 3. Gérer les interactions (hover)
                 document.querySelectorAll(interactiveElements).forEach(element => {
                     element.addEventListener('mouseenter', () => {
                         cursorOutline.classList.add('hover-target');
