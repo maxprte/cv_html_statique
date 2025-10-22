@@ -1,733 +1,735 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="CV en ligne de Max Porte - Étudiant BTS SIO SISR, compétences en informatique, réseaux et systèmes.">
-  <meta name="keywords" content="CV, BTS SIO, Informatique, Réseaux, Linux, Windows, Cisco, Fortinet">
-  <meta name="author" content="Max Porte">
-  <title>CV en ligne - Max Porte</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-  <style>
-    :root {
-      --primary-color: #0d6efd;
-      --secondary-color: #6610f2;
-      --dark-bg: #1a1d29;
-      --card-bg: #ffffff;
-      --text-primary: #212529;
-      --text-secondary: #6c757d;
-      --cursor-color: #764ba2; /* Couleur du curseur personnalisée */
-    }
-
-    /* ======================================
-    STYLE DU CURSEUR PERSONNALISÉ 🎯
-    ======================================
-    */
-    /* Masquer le curseur par défaut sur les éléments non-interactifs */
-    body {
-      cursor: none;
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      line-height: 1.6;
-      scroll-behavior: smooth;
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-      min-height: 100vh;
-      color: var(--text-primary);
-    }
-    
-    /* Le 'dot' principal (suit la souris avec un léger délai) */
-    .custom-cursor-dot {
-      width: 8px;
-      height: 8px;
-      background-color: var(--cursor-color);
-      border-radius: 50%;
-      pointer-events: none; /* Important: pour que le curseur ne bloque pas les clics */
-      position: fixed;
-      z-index: 9999;
-      mix-blend-mode: difference; /* Pour qu'il soit visible sur n'importe quel fond */
-      transform: translate(-50%, -50%);
-      transition: transform 0.05s ease-out; /* Plus rapide pour le 'dot' */
-    }
-
-    /* Le 'outline' qui réagit aux éléments interactifs */
-    .custom-cursor-outline {
-      width: 30px;
-      height: 30px;
-      border: 2px solid var(--cursor-color);
-      border-radius: 50%;
-      pointer-events: none;
-      position: fixed;
-      z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: all 0.15s ease-out, background-color 0.2s; /* Plus lent pour l''outline' */
-    }
-
-    /* Styles pour les éléments interactifs (boutons, liens, etc.) */
-    a, button, .accordion-button, .card:hover, .nav-link, .list-group-item, .badge {
-      cursor: none; /* Assurez-vous que le curseur par défaut est masqué ici aussi */
-    }
-
-    /* Effet sur l'outline lorsque la souris est sur un élément interactif */
-    .custom-cursor-outline.hover-target {
-      transform: translate(-50%, -50%) scale(1.5); /* Agrandissement */
-      border-color: #fff; /* Changement de couleur pour contraster */
-      background-color: var(--cursor-color);
-      mix-blend-mode: normal; /* Normaliser le blend pour l'arrière-plan du outline */
-    }
-    .custom-cursor-dot.hover-target {
-      transform: translate(-50%, -50%) scale(0); /* Masquer le dot lorsque l'outline s'agrandit */
-    }
-    
-    /* Masquer le curseur sur mobile pour éviter les bugs (car non compatible avec le toucher) */
-    @media (max-width: 992px) {
-      .custom-cursor-dot, .custom-cursor-outline {
-        display: none;
-      }
-      body {
-        cursor: auto;
-      }
-      a, button, .accordion-button, .card:hover, .nav-link, .list-group-item, .badge {
-        cursor: pointer;
-      }
-    }
-
-    /* ======================================
-    FIN DU STYLE DU CURSEUR PERSONNALISÉ
-    ======================================
-    */
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: #fff;
-      text-align: center;
-      padding: 5rem 1rem 4rem;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-
-    header::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-      background-size: 50px 50px;
-      animation: moveBackground 20s linear infinite;
-    }
-
-    @keyframes moveBackground {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(50px, 50px); }
-    }
-
-    header h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      position: relative;
-      z-index: 1;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-      animation: fadeInDown 0.8s ease-out;
-    }
-
-    header p {
-      font-size: 1.3rem;
-      margin-top: 0.5rem;
-      position: relative;
-      z-index: 1;
-      animation: fadeInUp 0.8s ease-out 0.2s both;
-    }
-
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .btn-primary-custom {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border: none;
-      padding: 12px 30px;
-      border-radius: 50px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-    }
-
-    .btn-primary-custom:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-    }
-
-    nav.navbar {
-      backdrop-filter: blur(10px);
-      background-color: rgba(255, 255, 255, 0.95) !important;
-      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-    }
-
-    .navbar-brand {
-      font-weight: 700;
-      color: var(--primary-color) !important;
-      font-size: 1.3rem;
-    }
-
-    .nav-link {
-      font-weight: 500;
-      transition: all 0.3s ease;
-      position: relative;
-      padding: 0.5rem 1rem !important;
-    }
-
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      width: 0;
-      height: 2px;
-      background: var(--primary-color);
-      transition: all 0.3s ease;
-      transform: translateX(-50%);
-    }
-
-    .nav-link:hover::after {
-      width: 80%;
-    }
-
-    section {
-      padding: 4rem 1rem;
-      animation: fadeIn 0.6s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .card {
-      border: none;
-      border-radius: 20px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      margin-bottom: 1.5rem;
-      background: var(--card-bg);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-      transform: scaleX(0);
-      transition: transform 0.4s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-    }
-
-    .card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .accordion-button {
-      font-weight: 600;
-      border-radius: 15px !important;
-      transition: all 0.3s ease;
-    }
-
-    .accordion-button:not(.collapsed) {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-    }
-
-    .accordion-button:focus {
-      box-shadow: none;
-      border-color: transparent;
-    }
-
-    .accordion-item {
-      border: none;
-      margin-bottom: 1rem;
-      border-radius: 15px !important;
-      overflow: hidden;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-    }
-
-    .badge {
-      font-size: 0.9rem;
-      padding: 0.6em 1em;
-      margin-right: 0.5rem;
-      margin-bottom: 0.5rem;
-      border-radius: 50px;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      display: inline-block;
-    }
-
-    .badge:hover {
-      transform: scale(1.1);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-
-    .progress {
-      height: 25px;
-      border-radius: 50px;
-      margin-bottom: 1rem;
-      background-color: #e9ecef;
-      overflow: visible;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .progress-bar {
-      border-radius: 50px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      padding-left: 1rem;
-      transition: width 1s ease;
-      position: relative;
-      overflow: visible;
-    }
-
-    .progress-bar::after {
-      content: attr(data-label);
-      position: absolute;
-      right: 10px;
-    }
-
-    .list-group-item {
-      border: none;
-      border-radius: 15px !important;
-      margin-bottom: 0.5rem;
-      transition: all 0.3s ease;
-      background: var(--card-bg);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-
-    .list-group-item:hover {
-      transform: translateX(10px);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-    }
-
-    .list-group-item:hover i {
-      color: white;
-    }
-
-    footer {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      text-align: center;
-      padding: 2.5rem 1rem;
-      margin-top: 3rem;
-      box-shadow: 0 -5px 20px rgba(0,0,0,0.15);
-    }
-
-    .section-title {
-      color: #667eea;
-      border-bottom: 3px solid #667eea;
-      padding-bottom: 0.8rem;
-      margin-bottom: 2rem;
-      font-weight: 700;
-      position: relative;
-      display: inline-block;
-    }
-
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      left: 0;
-      width: 50px;
-      height: 3px;
-      background: #764ba2;
-    }
-
-    .btn-outline-primary {
-      border-width: 2px;
-      border-radius: 50px;
-      padding: 10px 25px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    .btn-outline-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(13, 110, 253, 0.4);
-    }
-
-    .btn-outline-danger {
-      border-width: 2px;
-      border-radius: 50px;
-      padding: 10px 25px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    .btn-outline-danger:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
-    }
-
-    @media (max-width: 768px) {
-      header h1 { font-size: 2rem; }
-      header p { font-size: 1rem; }
-      section { padding: 2rem 1rem; }
-    }
-
-    .skill-category {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 20px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-      margin-bottom: 1.5rem;
-      transition: all 0.3s ease;
-    }
-
-    .skill-category:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-    }
-
-    .skill-category h4 {
-      color: #667eea;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-  </style>
-</head>
-<body>
-  
-  <div class="custom-cursor-dot"></div>
-  <div class="custom-cursor-outline"></div>
-  <header class="mb-5">
-    <h1>Max Porte</h1>
-    <p>Étudiant en BTS SIO SISR - Alternance</p>
-    <a href="#contact" class="btn btn-light btn-lg btn-primary-custom mt-3">
-      <i class="bi bi-envelope me-2"></i>Me Contacter
-    </a>
-  </header>
-
-  <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm mb-4">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="#">
-        <i class="bi bi-person-badge me-2"></i>CV Max Porte
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#formation">Formation</a></li>
-          <li class="nav-item"><a class="nav-link" href="#experience">Expériences</a></li>
-          <li class="nav-item"><a class="nav-link" href="#competences">Compétences</a></li>
-          <li class="nav-item"><a class="nav-link" href="#interets">Centres d'intérêt</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <main class="container">
-    <section id="formation">
-      <h2 class="section-title"><i class="bi bi-mortarboard-fill me-2"></i>Formation</h2>
-      <div class="card p-4">
-        <h3 class="h5 text-primary fw-bold">BTS SIO SISR</h3>
-        <p class="mb-1"><strong>CFAI UIMM Loire Drôme Ardèche</strong></p>
-        <p class="text-muted"><i class="bi bi-calendar3 me-2"></i>2025 - en cours (alternance chez Yesss Electrique)</p>
-      </div>
-      <div class="card p-4">
-        <h3 class="h5 text-primary fw-bold">Bac Professionnel Systèmes Numériques (option RISC)</h3>
-        <p class="mb-1"><strong>Lycée Le Marais Sainte Thérèse</strong></p>
-        <p class="text-muted"><i class="bi bi-calendar3 me-2"></i>2022 - 2025</p>
-        <span class="badge bg-success mt-2"><i class="bi bi-trophy me-1"></i>Mention Bien - 15.64/20</span>
-      </div>
-    </section>
-
-    <section id="experience">
-      <h2 class="section-title"><i class="bi bi-briefcase-fill me-2"></i>Expériences professionnelles</h2>
-      <div class="accordion" id="expAccordion">
-        <div class="accordion-item">
-          <h3 class="accordion-header" id="exp1">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#exp1Content">
-              <i class="bi bi-building me-2"></i>Alternance - Technicien Réseaux @ Yesss Electrique
-            </button>
-          </h3>
-          <div id="exp1Content" class="accordion-collapse collapse show" data-bs-parent="#expAccordion">
-            <div class="accordion-body">
-              <strong><i class="bi bi-calendar-check me-2"></i>Depuis 08/2025</strong>
-              <p class="mt-2">Support informatique, gestion des réseaux, déploiement matériel, maintenance.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <h3 class="accordion-header" id="exp2">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#exp2Content">
-              <i class="bi bi-folder me-2"></i>Stages Professionnels (2022 - 2025)
-            </button>
-          </h3>
-          <div id="exp2Content" class="accordion-collapse collapse" data-bs-parent="#expAccordion">
-            <div class="accordion-body">
-              <div class="accordion" id="stagesAccordion">
-                <div class="accordion-item">
-                  <h4 class="accordion-header" id="stage1">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stage1Content">
-                      SDIS42 - Service Départemental d'Incendie (12/2024)
-                    </button>
-                  </h4>
-                  <div id="stage1Content" class="accordion-collapse collapse" data-bs-parent="#stagesAccordion">
-                    <div class="accordion-body">
-                      <i class="bi bi-shield-check me-2 text-primary"></i>Déploiement BIP, mise à jour firmware firewall Fortinet.
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h4 class="accordion-header" id="stage2">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stage2Content">
-                      Abicom (04/2024 - 05/2024)
-                    </button>
-                  </h4>
-                  <div id="stage2Content" class="accordion-collapse collapse" data-bs-parent="#stagesAccordion">
-                    <div class="accordion-body">
-                      <i class="bi bi-headset me-2 text-success"></i>Support informatique, maintenance réseau, migration de boîtes mail.
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h4 class="accordion-header" id="stage3">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stage3Content">
-                      CRS Informatique (11/2023)
-                    </button>
-                  </h4>
-                  <div id="stage3Content" class="accordion-collapse collapse" data-bs-parent="#stagesAccordion">
-                    <div class="accordion-body">
-                      <i class="bi bi-database me-2 text-warning"></i>Création Active Directory, GPO, dossiers partagés.
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h4 class="accordion-header" id="stage4">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stage4Content">
-                      SPS - Sérénité Protection service (06/2023)
-                    </button>
-                  </h4>
-                  <div id="stage4Content" class="accordion-collapse collapse" data-bs-parent="#stagesAccordion">
-                    <div class="accordion-body">
-                      <i class="bi bi-camera-video me-2 text-danger"></i>Câblage basse tension, installation d'alarmes et vidéo surveillance.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="competences">
-      <h2 class="section-title"><i class="bi bi-lightbulb-fill me-2"></i>Compétences</h2>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="skill-category">
-            <h4><i class="bi bi-hdd-stack me-2"></i>Systèmes</h4>
-            <span class="badge bg-primary">Linux (Ubuntu Server)</span>
-            <span class="badge bg-primary">Windows 10/11</span>
-            <span class="badge bg-info">Active Directory</span>
-          </div>
-
-          <div class="skill-category">
-            <h4><i class="bi bi-diagram-3 me-2"></i>Réseaux</h4>
-            <span class="badge bg-success">Cisco (VLAN, Routage)</span>
-            <span class="badge bg-success">Firewall Fortinet</span>
-            <span class="badge bg-warning text-dark">TCP/IP</span>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="skill-category">
-            <h4><i class="bi bi-tools me-2"></i>Outils & Expertise</h4>
-            <div class="progress">
-              <div class="progress-bar bg-info" style="width: 90%" data-label="90%">Active Directory</div>
-            </div>
-            <div class="progress">
-              <div class="progress-bar bg-warning" style="width: 85%" data-label="85%">GPO</div>
-            </div>
-            <div class="progress">
-              <div class="progress-bar bg-danger" style="width: 80%" data-label="80%">Maintenance</div>
-            </div>
-            <div class="progress">
-              <div class="progress-bar bg-success" style="width: 75%" data-label="75%">Support Utilisateur</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="interets">
-      <h2 class="section-title"><i class="bi bi-heart-fill me-2"></i>Centres d'intérêt</h2>
-      <div class="row">
-        <div class="col-md-6">
-          <ul class="list-group">
-            <li class="list-group-item d-flex align-items-center">
-              <i class="bi bi-pc-display me-3 text-primary fs-5"></i>
-              <span class="fw-semibold">Informatique & Technologies</span>
-            </li>
-            <li class="list-group-item d-flex align-items-center">
-              <i class="bi bi-music-note-beamed me-3 text-success fs-5"></i>
-              <span class="fw-semibold">Musique</span>
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-6">
-          <ul class="list-group">
-            <li class="list-group-item d-flex align-items-center">
-              <i class="bi bi-tools me-3 text-warning fs-5"></i>
-              <span class="fw-semibold">Mécanique automobile</span>
-            </li>
-            <li class="list-group-item d-flex align-items-center">
-              <i class="bi bi-controller me-3 text-danger fs-5"></i>
-              <span class="fw-semibold">Sport</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="text-center mb-5">
-      <h2 class="section-title"><i class="bi bi-envelope-fill me-2"></i>Contact</h2>
-      <div class="card p-5">
-        <p class="mb-4">
-          <a href="mailto:max.porte1234@gmail.com" class="btn btn-outline-primary btn-lg me-2 mb-2">
-            <i class="bi bi-envelope me-2"></i>Envoyer un email
-          </a>
-          <a href="https://raw.githubusercontent.com/maxprte/cv_html_statique/main/Max-PORTE-FlowCV-Resume-20251022.pdf"
-   class="btn btn-outline-danger btn-lg mb-2"
-   download="Max-PORTE-FlowCV-Resume-20251022.pdf">
-  <i class="bi bi-file-earmark-pdf me-2"></i>Télécharger mon CV
-</a>
-        </p>
-        <p class="mt-3 fs-5">
-          <i class="bi bi-github me-2"></i>Retrouvez-moi sur GitHub :
-          <a href="https://github.com/maxprte" target="_blank" rel="noopener noreferrer" class="fw-bold text-decoration-none">@maxprte</a>
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p class="mb-0 fs-5">© 2025 Max Porte - CV en ligne</p>
-    <p class="mt-2 opacity-75">Fait avec <i class="bi bi-heart-fill text-danger"></i> et Bootstrap</p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Animation des sections au scroll
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.animation = 'fadeIn 0.6s ease-out';
-          }
-        });
-      }, { threshold: 0.1 });
-
-      document.querySelectorAll('section').forEach(section => {
-        observer.observe(section);
-      });
-
-      // Animation des barres de progression
-      document.querySelectorAll('.progress-bar').forEach(bar => {
-        const width = bar.style.width;
-        bar.style.width = '0';
-        setTimeout(() => {
-          bar.style.width = width;
-        }, 300);
-      });
-
-      // =======================================
-      // LOGIQUE DU CURSEUR PERSONNALISÉ (JS) 🖱️
-      // =======================================
-      const cursorDot = document.querySelector('.custom-cursor-dot');
-      const cursorOutline = document.querySelector('.custom-cursor-outline');
-      const interactiveElements = 'a, button, .accordion-button, .card, .nav-link, .list-group-item, .badge';
-      
-      // On vérifie que les éléments du curseur existent avant d'ajouter les écouteurs
-      if (cursorDot && cursorOutline) {
-        let mouseX = 0;
-        let mouseY = 0;
-        let dotX = 0;
-        let dotY = 0;
-        let outlineX = 0;
-        let outlineY = 0;
-        const speedDot = 0.05; // Vitesse de suivi du dot
-        const speedOutline = 0.15; // Vitesse de suivi de l'outline
-
-        // 1. Mettre à jour la position de la souris
-        window.addEventListener('mousemove', (e) => {
-          mouseX = e.clientX;
-          mouseY = e.clientY;
-        });
-
-        // 2. Animer le curseur
-        function animateCursor() {
-          // Calcul de la nouvelle position du dot (interpolation linéaire)
-          dotX += (mouseX - dotX) * speedDot;
-          dotY += (mouseY - dotY) * speedDot;
-          cursorDot.style.left = `${dotX}px`;
-          cursorDot.style.top = `${dotY}px`;
-
-          // Calcul de la nouvelle position de l'outline (interpolation linéaire)
-          outlineX += (mouseX - outlineX) * speedOutline;
-          outlineY += (mouseY - outlineY) * speedOutline;
-          cursorOutline.style.left = `${outlineX}px`;
-          cursorOutline.style.top = `${outlineY}px`;
-
-          requestAnimationFrame(animateCursor);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CV en ligne de Max Porte - Étudiant BTS SIO SISR, compétences en informatique, réseaux et systèmes.">
+    <meta name="keywords" content="CV, BTS SIO, Informatique, Réseaux, Linux, Windows, Cisco, Fortinet">
+    <meta name="author" content="Max Porte">
+    <title>CV en ligne - Max Porte</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6610f2;
+            --dark-bg: #1a1d29;
+            --card-bg: #ffffff;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --cursor-color: #764ba2; /* Couleur du curseur personnalisée */
         }
 
-        animateCursor();
+        /* ======================================
+        STYLE DU CURSEUR PERSONNALISÉ 🎯
+        ======================================
+        */
+        body {
+            cursor: none;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+        
+        /* Le 'dot' principal (suit la souris avec un léger délai) */
+        .custom-cursor-dot {
+            width: 10px; /* Légèrement plus grand */
+            height: 10px;
+            background-color: var(--cursor-color);
+            border-radius: 2px; /* Carré avec bords légèrement arrondis */
+            pointer-events: none;
+            position: fixed;
+            z-index: 9999;
+            /* mix-blend-mode: difference; */ /* Retiré pour plus de contrôle */
+            transform: translate(-50%, -50%) rotate(45deg); /* Tourné à 45° (losange) */
+            transition: transform 0.05s ease-out, background-color 0.2s;
+        }
 
-        // 3. Gérer les interactions (hover)
-        document.querySelectorAll(interactiveElements).forEach(element => {
-          element.addEventListener('mouseenter', () => {
-            cursorOutline.classList.add('hover-target');
-            cursorDot.classList.add('hover-target');
-          });
-          element.addEventListener('mouseleave', () => {
-            cursorOutline.classList.remove('hover-target');
-            cursorDot.classList.remove('hover-target');
-          });
+        /* Le 'outline' qui réagit aux éléments interactifs */
+        .custom-cursor-outline {
+            width: 36px; /* Légèrement plus grand */
+            height: 36px;
+            border: 1px solid var(--cursor-color); /* Bordure plus fine */
+            border-radius: 50%;
+            pointer-events: none;
+            position: fixed;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Courbe d'animation plus fluide */
+        }
+
+        /* Styles pour les éléments interactifs (boutons, liens, etc.) */
+        a, button, .accordion-button, .card:hover, .nav-link, .list-group-item, .badge {
+            cursor: none;
+        }
+
+        /* Effet sur l'outline lorsque la souris est sur un élément interactif */
+        .custom-cursor-outline.hover-target {
+            transform: translate(-50%, -50%) scale(1.1); /* Agrandissement subtil */
+            border-width: 3px; /* Épaississement de la bordure */
+            border-color: var(--primary-color); 
+            background-color: rgba(118, 75, 162, 0.1); /* Remplissage léger */
+        }
+        
+        /* Effet sur le dot lorsque la souris est sur un élément interactif */
+        .custom-cursor-dot.hover-target {
+            background-color: var(--primary-color);
+            transform: translate(-50%, -50%) rotate(0deg) scale(0.6); /* Reviens à une croix */
+            border-radius: 0; /* Pour un effet de croix */
+        }
+        
+        /* Masquer le curseur sur mobile pour éviter les bugs */
+        @media (max-width: 992px) {
+            .custom-cursor-dot, .custom-cursor-outline {
+                display: none;
+            }
+            body {
+                cursor: auto;
+            }
+            a, button, .accordion-button, .card:hover, .nav-link, .list-group-item, .badge {
+                cursor: pointer;
+            }
+        }
+
+        /* ======================================
+        FIN DU STYLE DU CURSEUR PERSONNALISÉ
+        ======================================
+        */
+        /* ... Le reste de votre CSS (inchangé) ... */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            text-align: center;
+            padding: 5rem 1rem 4rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        header p {
+            font-size: 1.3rem;
+            margin-top: 0.5rem;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-primary-custom {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        nav.navbar {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            font-size: 1.3rem;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        section {
+            padding: 4rem 1rem;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 1.5rem;
+            background: var(--card-bg);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .accordion-button {
+            font-weight: 600;
+            border-radius: 15px !important;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: transparent;
+        }
+
+        .accordion-item {
+            border: none;
+            margin-bottom: 1rem;
+            border-radius: 15px !important;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .badge {
+            font-size: 0.9rem;
+            padding: 0.6em 1em;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .badge:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .progress {
+            height: 25px;
+            border-radius: 50px;
+            margin-bottom: 1rem;
+            background-color: #e9ecef;
+            overflow: visible;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar {
+            border-radius: 50px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            padding-left: 1rem;
+            transition: width 1s ease;
+            position: relative;
+            overflow: visible;
+        }
+
+        .progress-bar::after {
+            content: attr(data-label);
+            position: absolute;
+            right: 10px;
+        }
+
+        .list-group-item {
+            border: none;
+            border-radius: 15px !important;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+            background: var(--card-bg);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .list-group-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .list-group-item:hover i {
+            color: white;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            margin-top: 3rem;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.15);
+        }
+
+        .section-title {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.8rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #764ba2;
+        }
+
+        .btn-outline-primary {
+            border-width: 2px;
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(13, 110, 253, 0.4);
+        }
+
+        .btn-outline-danger {
+            border-width: 2px;
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-danger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            header p { font-size: 1rem; }
+            section { padding: 2rem 1rem; }
+        }
+
+        .skill-category {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+
+        .skill-category h4 {
+            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="custom-cursor-dot"></div>
+    <div class="custom-cursor-outline"></div>
+    <header class="mb-5">
+        <h1>Max Porte</h1>
+        <p>Étudiant en BTS SIO SISR - Alternance</p>
+        <a href="#contact" class="btn btn-light btn-lg btn-primary-custom mt-3">
+            <i class="bi bi-envelope me-2"></i>Me Contacter
+        </a>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm mb-4">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="bi bi-person-badge me-2"></i>CV Max Porte
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#formation">Formation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Expériences</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#competences">Compétences</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#interets">Centres d'intérêt</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section id="formation">
+            <h2 class="section-title"><i class="bi bi-mortarboard-fill me-2"></i>Formation</h2>
+            <div class="card p-4">
+                <h3 class="h5 text-primary fw-bold">BTS SIO SISR</h3>
+                <p class="mb-1"><strong>CFAI UIMM Loire Drôme Ardèche</strong></p>
+                <p class="text-muted"><i class="bi bi-calendar3 me-2"></i>2025 - en cours (alternance chez Yesss Electrique)</p>
+            </div>
+            <div class="card p-4">
+                <h3 class="h5 text-primary fw-bold">Bac Professionnel Systèmes Numériques (option RISC)</h3>
+                <p class="mb-1"><strong>Lycée Le Marais Sainte Thérèse</strong></p>
+                <p class="text-muted"><i class="bi bi-calendar3 me-2"></i>2022 - 2025</p>
+                <span class="badge bg-success mt-2"><i class="bi bi-trophy me-1"></i>Mention Bien - 15.64/20</span>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2 class="section-title"><i class="bi bi-briefcase-fill me-2"></i>Expériences professionnelles</h2>
+            <div class="accordion" id="expAccordion">
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="exp1">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#exp1Content">
+                            <i class="bi bi-building me-2"></i>Alternance - Technicien Réseaux @ Yesss Electrique
+                        </button>
+                    </h3>
+                    <div id="exp1Content" class="accordion-collapse collapse show" data-bs-parent="#expAccordion">
+                        <div class="accordion-body">
+                            <strong><i class="bi bi-calendar-check me-2"></i>Depuis 08/2025</strong>
+                            <p class="mt-2">Support informatique, gestion des réseaux, déploiement matériel, maintenance.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="exp2">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#exp2Content">
+                            <i class="bi bi-folder me-2"></i>Stages Professionnels (2022 - 2025)
+                        </button>
+                    </h3>
+                    <div id="exp2Content" class="accordion-collapse collapse" data-bs-parent="#expAccordion">
+                        <div class="accordion-body">
+                            <div class="accordion" id="stagesAccordion">
+                                <div class="accordion-item">
+                                    <h4 class="accordion-header" id="stage1">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stage1Content">
+                                            SDIS42 - Service Départemental d'Incendie (12/2024)
+                                        </button>
+                                    </h4>
+                                    <div id="stage1Content" class="accordion-collapse collapse" data-bs-parent="#stagesAccordion">
+                                        <div class="accordion-body">
+                                            <i class="bi bi-shield-check me-2 text-primary"></i>Déploiement BIP, mise à jour firmware firewall Fortinet.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <h4 class="accordion-header" id="stage2">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stage2Content">
+                                            Abicom (04/2024 - 05/2024)
+                                        </button>
+                                    </h4>
+                                    <div id="stage2Content" class="accordion-collapse collapse" data-bs-parent="#stagesAccordion">
+                                        <div class="accordion-body">
+                                            <i class="bi bi-headset me-2 text-success"></i>Support informatique, maintenance réseau, migration de boîtes mail.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <h4 class="accordion-header" id="stage3">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stage3Content">
+                                            CRS Informatique (11/2023)
+                                        </button>
+                                    </h4>
+                                    <div id="stage3Content" class="accordion-collapse collapse" data-bs-parent="#stagesAccordion">
+                                        <div class="accordion-body">
+                                            <i class="bi bi-database me-2 text-warning"></i>Création Active Directory, GPO, dossiers partagés.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <h4 class="accordion-header" id="stage4">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stage4Content">
+                                            SPS - Sérénité Protection service (06/2023)
+                                        </button>
+                                    </h4>
+                                    <div id="stage4Content" class="accordion-collapse collapse" data-bs-parent="#stagesAccordion">
+                                        <div class="accordion-body">
+                                            <i class="bi bi-camera-video me-2 text-danger"></i>Câblage basse tension, installation d'alarmes et vidéo surveillance.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="competences">
+            <h2 class="section-title"><i class="bi bi-lightbulb-fill me-2"></i>Compétences</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="skill-category">
+                        <h4><i class="bi bi-hdd-stack me-2"></i>Systèmes</h4>
+                        <span class="badge bg-primary">Linux (Ubuntu Server)</span>
+                        <span class="badge bg-primary">Windows 10/11</span>
+                        <span class="badge bg-info">Active Directory</span>
+                    </div>
+
+                    <div class="skill-category">
+                        <h4><i class="bi bi-diagram-3 me-2"></i>Réseaux</h4>
+                        <span class="badge bg-success">Cisco (VLAN, Routage)</span>
+                        <span class="badge bg-success">Firewall Fortinet</span>
+                        <span class="badge bg-warning text-dark">TCP/IP</span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="skill-category">
+                        <h4><i class="bi bi-tools me-2"></i>Outils & Expertise</h4>
+                        <div class="progress">
+                            <div class="progress-bar bg-info" style="width: 90%" data-label="90%">Active Directory</div>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-warning" style="width: 85%" data-label="85%">GPO</div>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-danger" style="width: 80%" data-label="80%">Maintenance</div>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" style="width: 75%" data-label="75%">Support Utilisateur</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="interets">
+            <h2 class="section-title"><i class="bi bi-heart-fill me-2"></i>Centres d'intérêt</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="bi bi-pc-display me-3 text-primary fs-5"></i>
+                            <span class="fw-semibold">Informatique & Technologies</span>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="bi bi-music-note-beamed me-3 text-success fs-5"></i>
+                            <span class="fw-semibold">Musique</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="bi bi-tools me-3 text-warning fs-5"></i>
+                            <span class="fw-semibold">Mécanique automobile</span>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            <i class="bi bi-controller me-3 text-danger fs-5"></i>
+                            <span class="fw-semibold">Sport</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="text-center mb-5">
+            <h2 class="section-title"><i class="bi bi-envelope-fill me-2"></i>Contact</h2>
+            <div class="card p-5">
+                <p class="mb-4">
+                    <a href="mailto:max.porte1234@gmail.com" class="btn btn-outline-primary btn-lg me-2 mb-2">
+                        <i class="bi bi-envelope me-2"></i>Envoyer un email
+                    </a>
+                    <a href="https://raw.githubusercontent.com/maxprte/cv_html_statique/main/Max-PORTE-FlowCV-Resume-20251022.pdf"
+                   class="btn btn-outline-danger btn-lg mb-2"
+                   download="Max-PORTE-FlowCV-Resume-20251022.pdf">
+                        <i class="bi bi-file-earmark-pdf me-2"></i>Télécharger mon CV
+                    </a>
+                </p>
+                <p class="mt-3 fs-5">
+                    <i class="bi bi-github me-2"></i>Retrouvez-moi sur GitHub :
+                    <a href="https://github.com/maxprte" target="_blank" rel="noopener noreferrer" class="fw-bold text-decoration-none">@maxprte</a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p class="mb-0 fs-5">© 2025 Max Porte - CV en ligne</p>
+        <p class="mt-2 opacity-75">Fait avec <i class="bi bi-heart-fill text-danger"></i> et Bootstrap</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animation des sections au scroll (inchangée)
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 0.6s ease-out';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Animation des barres de progression (inchangée)
+            document.querySelectorAll('.progress-bar').forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 300);
+            });
+
+            // =======================================
+            // LOGIQUE DU CURSEUR PERSONNALISÉ (JS) 🖱️
+            // =======================================
+            const cursorDot = document.querySelector('.custom-cursor-dot');
+            const cursorOutline = document.querySelector('.custom-cursor-outline');
+            const interactiveElements = 'a, button, .accordion-button, .card, .nav-link, .list-group-item, .badge';
+            
+            if (cursorDot && cursorOutline) {
+                let mouseX = 0;
+                let mouseY = 0;
+                let dotX = 0;
+                let dotY = 0;
+                let outlineX = 0;
+                let outlineY = 0;
+                const speedDot = 0.15; // Augmenté la vitesse du dot pour le rendre plus réactif
+                const speedOutline = 0.1; // Diminué la vitesse de l'outline pour un meilleur effet de traîne
+
+                // 1. Mettre à jour la position de la souris
+                window.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                });
+
+                // 2. Animer le curseur
+                function animateCursor() {
+                    // Interpolation linéaire pour le 'dot'
+                    dotX += (mouseX - dotX) * speedDot;
+                    dotY += (mouseY - dotY) * speedDot;
+                    cursorDot.style.left = `${dotX}px`;
+                    cursorDot.style.top = `${dotY}px`;
+
+                    // Interpolation linéaire pour l''outline'
+                    outlineX += (mouseX - outlineX) * speedOutline;
+                    outlineY += (mouseY - outlineY) * speedOutline;
+                    cursorOutline.style.left = `${outlineX}px`;
+                    cursorOutline.style.top = `${outlineY}px`;
+
+                    requestAnimationFrame(animateCursor);
+                }
+
+                animateCursor();
+
+                // 3. Gérer les interactions (hover) (inchangé)
+                document.querySelectorAll(interactiveElements).forEach(element => {
+                    element.addEventListener('mouseenter', () => {
+                        cursorOutline.classList.add('hover-target');
+                        cursorDot.classList.add('hover-target');
+                    });
+                    element.addEventListener('mouseleave', () => {
+                        cursorOutline.classList.remove('hover-target');
+                        cursorDot.classList.remove('hover-target');
+                    });
+                });
+            }
+            // =======================================
+            // FIN LOGIQUE DU CURSEUR PERSONNALISÉ
+            // =======================================
         });
-      }
-      // =======================================
-      // FIN LOGIQUE DU CURSEUR PERSONNALISÉ
-      // =======================================
-    });
-  </script>
+    </script>
 </body>
 </html>
