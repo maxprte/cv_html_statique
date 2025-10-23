@@ -51,7 +51,7 @@
         }
 
         /* ======================================
-        STYLES GÉNÉRAUX & FLUIDIFICATION
+        STYLES GÉNÉRAUX & CURSEUR
         ====================================== */
         body {
             cursor: none;
@@ -63,7 +63,15 @@
             color: var(--text-primary);
             transition: background 0.5s, color 0.5s;
         }
+
+        /* CORRECTION DU CURSEUR PAR DÉFAUT - NOUVEAU/MODIFIÉ */
+        /* Cible tous les éléments qui pourraient afficher le curseur par défaut */
+        a, button, .accordion-button, .card, .nav-link, .list-group-item, .badge, 
+        .btn, .form-control, .theme-toggle-btn {
+            cursor: none !important; /* Force la suppression du curseur par défaut sur les éléments interactifs */
+        }
        
+        /* Structure principale */
         main.container {
             padding-top: 2rem;
             padding-bottom: 2rem;
@@ -170,8 +178,10 @@
                 margin-left: auto;
                 background-color: transparent;
             }
-            .theme-toggle-btn {
-                 color: var(--text-primary);
+            /* Rétablit le curseur par défaut sur mobile (où le custom cursor est désactivé) */
+             a, button, .accordion-button, .card, .nav-link, .list-group-item, .badge, 
+             .btn, .form-control, .theme-toggle-btn {
+                cursor: pointer !important;
             }
         }
 
@@ -201,19 +211,18 @@
             margin-bottom: 2rem;
         }
 
-        /* Alignement du contenu de la carte de contact - NOUVEAU */
+        /* Contact (Alignement) */
         #contact .card {
-            text-align: left; /* Aligne le contenu de la carte à gauche */
+            text-align: left;
         }
         #contact .card p {
-            text-align: left; /* Assure que les paragraphes sont alignés à gauche */
-        }
-        #contact .card .btn {
-            /* Garde les boutons centrés ou gérés dans leur bloc */
-            display: inline-block;
+            text-align: left;
         }
         #contact .card .mb-4 {
-            text-align: center; /* Centre la ligne des boutons */
+            text-align: center;
+        }
+        #contact .card .mt-3 {
+            text-align: center;
         }
 
 
@@ -221,21 +230,19 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
         }
 
-        /* ======================================
-        SECTION COMPÉTENCES - NOUVEAU : AÉRATION
-        ====================================== */
+        /* SECTION COMPÉTENCES (Aération) */
         .skill-category {
-            padding: 2rem; /* Augmente le padding interne */
+            padding: 2rem;
             margin-bottom: 2rem;
         }
         .skill-category h4 {
-            margin-bottom: 1.5rem; /* Augmente l'espace sous le titre de la catégorie */
+            margin-bottom: 1.5rem;
         }
         .progress {
-            margin-bottom: 1.25rem; /* Augmente l'espace entre les barres de progression */
+            margin-bottom: 1.25rem;
         }
         .badge {
-            margin-right: 0.75rem; /* Augmente l'espace entre les badges */
+            margin-right: 0.75rem;
             margin-bottom: 0.75rem;
         }
 
@@ -285,7 +292,7 @@
 
 
         /* ======================================
-        CURSEUR (Styles conservés)
+        CURSEUR PERSONNALISÉ
         ====================================== */
         .custom-cursor-dot {
             width: 10px; height: 10px; background-color: var(--cursor-color); border-radius: 50%; pointer-events: none; position: fixed; z-index: 9999; transform: translate(-50%, -50%); transition: all 0.1s ease-out;
@@ -299,10 +306,11 @@
         .custom-cursor-dot:not(.hover-target)::after {
             content: none;
         }
+
+        /* Règle pour les appareils non-PC (mobile/tablette) */
         @media (max-width: 992px) {
             .custom-cursor-dot { display: none; }
             body { cursor: auto; }
-            a, button, .accordion-button, .card:hover, .nav-link, .list-group-item, .badge { cursor: pointer; }
         }
         
     </style>
@@ -520,7 +528,8 @@
         <section id="contact">
             <h2 class="section-title"><i class="bi bi-envelope-fill me-2"></i>Contact</h2>
             <div class="card p-5">
-                <p class="mb-4 text-center"> <a href="mailto:max.porte1234@gmail.com" class="btn btn-outline-primary btn-lg me-2 mb-2">
+                <p class="mb-4 text-center">
+                    <a href="mailto:max.porte1234@gmail.com" class="btn btn-outline-primary btn-lg me-2 mb-2">
                         <i class="bi bi-envelope me-2"></i>Envoyer un email
                     </a>
                     <a href="https://raw.githubusercontent.com/maxprte/cv_html_statique/main/Max-PORTE-FlowCV-Resume-20251022.pdf"
@@ -529,7 +538,8 @@
                         <i class="bi bi-file-earmark-pdf me-2"></i>Télécharger mon CV
                     </a>
                 </p>
-                <p class="mt-3 fs-5 text-center"> <i class="bi bi-github me-2"></i>Retrouvez-me sur GitHub :
+                <p class="mt-3 fs-5 text-center">
+                    <i class="bi bi-github me-2"></i>Retrouvez-me sur GitHub :
                     <a href="https://github.com/maxprte" target="_blank" rel="noopener noreferrer" class="fw-bold text-decoration-none">@maxprte</a>
                 </p>
             </div>
@@ -639,7 +649,7 @@
             // LOGIQUE DU NOUVEAU CURSEUR SIMPLE (DOT) 🖱️
             // =======================================
             const cursorDot = document.querySelector('.custom-cursor-dot');
-            const interactiveElements = 'a, button, .accordion-button, .card, .nav-link, .list-group-item, .badge';
+            const interactiveElements = 'a, button, .accordion-button, .card, .nav-link, .list-group-item, .badge, .btn';
             
             if (cursorDot && window.matchMedia('(min-width: 993px)').matches) {
                 let mouseX = 0;
