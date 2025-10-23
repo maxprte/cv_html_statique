@@ -64,15 +64,13 @@
             transition: background 0.5s, color 0.5s;
         }
        
-        /* Structure principale avec coins arrondis pour le contenu */
         main.container {
             padding-top: 2rem;
             padding-bottom: 2rem;
         }
 
-        /* NOUVEAU: Aération des sections */
         section {
-            padding: 4rem 1rem; /* Augmentation du padding vertical pour plus d'espace */
+            padding: 4rem 1rem;
         }
         @media (max-width: 768px) {
             section {
@@ -92,12 +90,10 @@
             position: relative;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            /* COINS ARRONDIS */
             border-bottom-left-radius: 20px;
             border-bottom-right-radius: 20px;
         }
 
-        /* Animation et fond du header (conservées) */
         header::before {
             content: '';
             position: absolute;
@@ -135,7 +131,6 @@
             font-size: 1.3rem;
         }
 
-        /* SÉLECTEUR DE THÈME - Positionnement fixe en haut à droite */
         .theme-toggle-container {
             position: fixed;
             top: 20px;
@@ -188,7 +183,7 @@
             color: var(--primary-color);
             border-bottom: 3px solid var(--primary-color);
             padding-bottom: 0.5rem;
-            margin-bottom: 3rem; /* AUGMENTÉ: Plus d'espace sous le titre */
+            margin-bottom: 3rem;
             font-weight: 600;
         }
 
@@ -203,21 +198,52 @@
             background: var(--card-bg);
             overflow: hidden;
             position: relative;
-            margin-bottom: 2rem; /* AUGMENTÉ: Plus d'espace entre les éléments de formation */
+            margin-bottom: 2rem;
         }
-        .card:last-child, .skill-category:last-child {
-            margin-bottom: 0;
+
+        /* Alignement du contenu de la carte de contact - NOUVEAU */
+        #contact .card {
+            text-align: left; /* Aligne le contenu de la carte à gauche */
         }
+        #contact .card p {
+            text-align: left; /* Assure que les paragraphes sont alignés à gauche */
+        }
+        #contact .card .btn {
+            /* Garde les boutons centrés ou gérés dans leur bloc */
+            display: inline-block;
+        }
+        #contact .card .mb-4 {
+            text-align: center; /* Centre la ligne des boutons */
+        }
+
 
         [data-bs-theme="dark"] .card {
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
+        }
+
+        /* ======================================
+        SECTION COMPÉTENCES - NOUVEAU : AÉRATION
+        ====================================== */
+        .skill-category {
+            padding: 2rem; /* Augmente le padding interne */
+            margin-bottom: 2rem;
+        }
+        .skill-category h4 {
+            margin-bottom: 1.5rem; /* Augmente l'espace sous le titre de la catégorie */
+        }
+        .progress {
+            margin-bottom: 1.25rem; /* Augmente l'espace entre les barres de progression */
+        }
+        .badge {
+            margin-right: 0.75rem; /* Augmente l'espace entre les badges */
+            margin-bottom: 0.75rem;
         }
 
         /* ACCORDION (Espacement) */
         .accordion-item {
             background-color: var(--accordion-bg);
             border-radius: 15px !important;
-            margin-bottom: 1.5rem; /* AUGMENTÉ: Espacement entre les items de l'accordéon */
+            margin-bottom: 1.5rem;
             overflow: hidden;
         }
         .accordion-item:last-child {
@@ -226,12 +252,12 @@
 
         /* LIST GROUP ITEMS (Centres d'intérêt) */
         .list-group {
-            margin-bottom: 1.5rem; /* Espace sous les colonnes de la liste */
+            margin-bottom: 1.5rem;
         }
         .list-group-item {
             border: none;
             border-radius: 15px !important;
-            margin-bottom: 0.8rem; /* AUGMENTÉ: Plus d'espace entre les items de la liste */
+            margin-bottom: 0.8rem;
             transition: all 0.3s ease;
             background: var(--card-bg);
             color: var(--text-primary);
@@ -253,7 +279,6 @@
             padding: 2.5rem 1rem;
             margin-top: 3rem;
             box-shadow: 0 -5px 20px rgba(0,0,0,0.15);
-            /* COINS ARRONDIS */
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
         }
@@ -492,11 +517,10 @@
             </div>
         </section>
 
-        <section id="contact" class="text-center mb-5">
+        <section id="contact">
             <h2 class="section-title"><i class="bi bi-envelope-fill me-2"></i>Contact</h2>
             <div class="card p-5">
-                <p class="mb-4">
-                    <a href="mailto:max.porte1234@gmail.com" class="btn btn-outline-primary btn-lg me-2 mb-2">
+                <p class="mb-4 text-center"> <a href="mailto:max.porte1234@gmail.com" class="btn btn-outline-primary btn-lg me-2 mb-2">
                         <i class="bi bi-envelope me-2"></i>Envoyer un email
                     </a>
                     <a href="https://raw.githubusercontent.com/maxprte/cv_html_statique/main/Max-PORTE-FlowCV-Resume-20251022.pdf"
@@ -505,8 +529,7 @@
                         <i class="bi bi-file-earmark-pdf me-2"></i>Télécharger mon CV
                     </a>
                 </p>
-                <p class="mt-3 fs-5">
-                    <i class="bi bi-github me-2"></i>Retrouvez-me sur GitHub :
+                <p class="mt-3 fs-5 text-center"> <i class="bi bi-github me-2"></i>Retrouvez-me sur GitHub :
                     <a href="https://github.com/maxprte" target="_blank" rel="noopener noreferrer" class="fw-bold text-decoration-none">@maxprte</a>
                 </p>
             </div>
@@ -524,7 +547,6 @@
             
             // =======================================
             // LOGIQUE DU MODE SOMBRE/CLAIR 🌙☀️
-            // Gère les boutons du bureau et du mobile
             // =======================================
             const htmlElement = document.documentElement; 
             const themeToggleBtnDesktop = document.getElementById('theme-toggle-btn-desktop');
@@ -532,20 +554,17 @@
             const themeToggleBtnMobile = document.getElementById('theme-toggle-btn-mobile');
             const themeIconMobile = document.getElementById('theme-icon-mobile');
 
-            // 1. Fonction pour appliquer le thème
             function applyTheme(theme) {
                 const isDark = theme === 'dark';
                 htmlElement.setAttribute('data-bs-theme', theme);
                 const iconClass = isDark ? 'bi bi-moon-fill' : 'bi bi-sun-fill';
                 
-                // Met à jour les deux icônes
                 if(themeIconDesktop) themeIconDesktop.className = iconClass;
                 if(themeIconMobile) themeIconMobile.className = iconClass; 
                 
                 localStorage.setItem('theme', theme); 
             }
 
-            // 2. Charger le thème à l'ouverture de la page
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme) {
                 applyTheme(savedTheme);
@@ -555,7 +574,6 @@
                 applyTheme('light');
             }
 
-            // 3. Écouteurs pour le clic sur les boutons (desktop et mobile)
             if (themeToggleBtnDesktop) {
                 themeToggleBtnDesktop.addEventListener('click', () => {
                     const currentTheme = htmlElement.getAttribute('data-bs-theme');
@@ -592,9 +610,6 @@
                     }
                 });
             });
-            // =======================================
-            // FIN DU DÉFILEMENT FLUIDE
-            // =======================================
 
 
             // Animation des sections au scroll (gardée)
