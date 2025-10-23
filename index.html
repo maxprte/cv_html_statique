@@ -11,8 +11,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         /* ======================================
-        VARIABLES CSS - MODE CLAIR
-        ====================================== */
+           VARIABLES CSS - MODE CLAIR
+           ====================================== */
         :root,
         [data-bs-theme="light"] {
             --primary-color: #0d6efd;
@@ -29,12 +29,11 @@
             --card-hover-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             --card-inner-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
             --badge-inner-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
-            --cursor-trail-color: rgba(118, 75, 162, 0.1); /* NOUVEAU */
         }
 
         /* ======================================
-        VARIABLES CSS - MODE SOMBRE
-        ====================================== */
+           VARIABLES CSS - MODE SOMBRE
+           ====================================== */
         [data-bs-theme="dark"] {
             --primary-color: #0d6efd;
             --secondary-color: #6610f2;
@@ -50,14 +49,13 @@
             --card-hover-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             --card-inner-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
             --badge-inner-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.15);
-            --cursor-trail-color: rgba(159, 122, 234, 0.1); /* NOUVEAU */
             --bs-body-bg: var(--body-bg);
             --bs-body-color: var(--text-primary);
         }
 
         /* ======================================
-        STYLES GÉNÉRAUX & ANIMATIONS
-        ====================================== */
+           STYLES GÉNÉRAUX & ANIMATIONS
+           ====================================== */
         * {
             margin: 0;
             padding: 0;
@@ -77,51 +75,72 @@
             overflow-x: hidden;
         }
 
-        /* CURSEUR FIXE : empêche le curseur par défaut */
         a, button, .accordion-button, .card, .nav-link, .list-group-item, 
         .badge, .btn, .form-control, .theme-toggle-btn {
             cursor: none !important;
         }
-        
+       
         section {
             padding: 4rem 1rem;
         }
         
-        /* Regroupement des keyframes de transition Y */
-        @keyframes fade-y-in {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         @keyframes expandWidth {
             from { width: 0; }
             to { width: 60%; }
         }
-        @keyframes moveBackground {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         @keyframes shimmer {
             0% { left: -100%; }
             100% { left: 100%; }
         }
+
         @keyframes heartbeat {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.2); }
         }
+
         @keyframes pulse-shadow {
-            0% { box-shadow: 0 0 0 0 var(--primary-color); }
+            0% { box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(13, 110, 253, 0); }
-            100% { box-shadow: 0 0 0 0 var(--primary-color); }
+            100% { box-shadow: 0 0 0 0 rgba(13, 110, 253, 0); }
         }
+
         @keyframes pulse-danger {
             0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(220, 53, 69, 0); }
             100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
         }
 
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
         /* ======================================
-        TITRES DE SECTION
-        ====================================== */
+           TITRES DE SECTION
+           ====================================== */
         .section-title {
             font-size: 2.5rem;
             font-weight: 700;
@@ -144,15 +163,52 @@
         }
 
         /* ======================================
-        NAVIGATION & THÈME
-        ====================================== */
+           BARRE DE NAVIGATION
+           ====================================== */
         nav.navbar {
             backdrop-filter: blur(20px) saturate(180%);
             background-color: var(--navbar-bg) !important;
             box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        /* ======================================
+           BOUTON TOGGLE THÈME
+           ====================================== */
         .theme-toggle-container {
             position: fixed;
             top: 20px;
@@ -162,74 +218,258 @@
             border-radius: 50%;
             padding: 5px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle-container:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(0,0,0,0.25);
+        }
+
+        .theme-toggle-btn {
+            background: var(--header-gradient);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            transform: rotate(180deg);
         }
 
         /* ======================================
-        HEADER & FOOTER
-        ====================================== */
+           HEADER
+           ====================================== */
         header {
             background: var(--header-gradient);
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             border-bottom-left-radius: 20px;
             border-bottom-right-radius: 20px;
         }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+        }
+
         header h1 {
-            animation: fade-y-in 0.8s ease-out; /* Utilisé le keyframe regroupé */
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 0;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+            animation: fadeInDown 0.8s ease-out;
         }
-        
-        footer {
-            background: var(--header-gradient);
-            padding: 1.5rem;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
+
+        header p {
+            font-size: 1.4rem;
+            margin-top: 1rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            animation: fadeInDown 0.8s ease-out 0.2s backwards;
         }
-        footer i.bi-heart-fill {
-            animation: heartbeat 1.5s infinite;
-        }
-        
+
         /* ======================================
-        CARTES ET ÉLÉMENTS INTERACTIFS
-        ====================================== */
+           CARTES
+           ====================================== */
         .card {
+            border: none;
+            border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08), var(--card-inner-shadow);
             background: var(--card-bg);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            position: relative;
         }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+        
         .card:hover {
             transform: translateY(-8px) scale(1.01);
             box-shadow: var(--card-hover-shadow), var(--card-inner-shadow);
         }
 
-        /* ACCORDION */
+        /* ======================================
+           ACCORDION
+           ====================================== */
         .accordion-item {
             background-color: var(--card-secondary-bg);
+            border: none;
+            border-radius: 15px !important;
+            margin-bottom: 1.5rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08), var(--card-inner-shadow);
+            transition: all 0.4s ease;
+            overflow: hidden;
         }
+
         .accordion-item:hover {
             transform: translateY(-5px);
             box-shadow: var(--card-hover-shadow), var(--card-inner-shadow);
         }
 
-        /* LIST GROUP ITEMS */
+        .accordion-button {
+            background-color: var(--card-secondary-bg);
+            color: var(--text-primary);
+            border: none;
+            font-weight: 600;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background: var(--header-gradient);
+            color: white;
+            box-shadow: none;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+            border: none;
+        }
+
+        .accordion-body {
+            padding: 1.5rem;
+            background: var(--card-bg);
+        }
+
+        /* ======================================
+           LIST GROUP
+           ====================================== */
         .list-group-item {
             background: var(--card-secondary-bg);
+            border: none;
+            border-radius: 12px !important;
+            margin-bottom: 1rem;
+            padding: 1.25rem;
             box-shadow: var(--card-inner-shadow);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+
         .list-group-item:hover {
+            transform: translateX(10px) scale(1.03);
             background: var(--header-gradient);
             color: white;
             box-shadow: var(--card-hover-shadow);
         }
 
-        /* COMPÉTENCES */
+        .list-group-item:hover i {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .list-group-item i {
+            transition: transform 0.3s ease;
+        }
+
+        /* ======================================
+           COMPÉTENCES
+           ====================================== */
         .skill-category {
             background: var(--card-secondary-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08), var(--card-inner-shadow);
+            transition: all 0.4s ease;
         }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-hover-shadow), var(--card-inner-shadow);
+        }
+
+        .skill-category h4 {
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
         .badge {
+            padding: 0.6rem 1.2rem;
+            margin: 0.3rem 0.75rem 0.75rem 0;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 20px;
             box-shadow: var(--badge-inner-shadow);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-block;
         }
-        
-        /* BARRES DE PROGRESSION */
+
+        .badge:hover {
+            transform: scale(1.15) translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        /* ======================================
+           BARRES DE PROGRESSION
+           ====================================== */
+        .progress {
+            height: 35px;
+            border-radius: 20px;
+            background: var(--progress-bg);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 20px;
+            transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            padding: 0 0.5rem;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
         .progress-bar span {
             display: block;
             margin: 0 auto;
@@ -237,14 +477,78 @@
             z-index: 1;
         }
 
-        /* BOUTONS (Effet de lueur/pulse) */
-        .btn-outline-primary:hover { animation: pulse-shadow 1.5s infinite; }
-        .btn-outline-danger:hover { animation: pulse-danger 1.5s infinite; }
+        /* ======================================
+           BOUTONS
+           ====================================== */
+        .btn {
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-outline-primary:hover {
+            animation: pulse-shadow 1.5s infinite;
+            transform: translateY(-3px);
+        }
+
+        .btn-outline-danger:hover {
+            animation: pulse-danger 1.5s infinite;
+            transform: translateY(-3px);
+        }
 
         /* ======================================
-        CURSEUR PERSONNALISÉ - AMÉLIORÉ
-        ====================================== */
-        /* Le point central */
+           FOOTER
+           ====================================== */
+        footer {
+            background: var(--header-gradient);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 4rem;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        footer p {
+            font-size: 0.9rem !important;
+            margin: 0 auto;
+        }
+
+        footer .fs-5 {
+            font-size: 1rem !important;
+        }
+
+        footer i.bi-heart-fill {
+            animation: heartbeat 1.5s infinite;
+        }
+
+        /* ======================================
+           CURSEUR PERSONNALISÉ
+           ====================================== */
         .custom-cursor-dot {
             width: 12px;
             height: 12px;
@@ -255,71 +559,80 @@
             z-index: 9999;
             transform: translate(-50%, -50%);
             transition: transform 0.15s ease, background 0.3s ease, width 0.3s ease, height 0.3s ease;
-            box-shadow: 0 0 10px var(--cursor-color); /* Légère lueur */
-        }
-
-        /* Le tracer (nouvel élément pour l'effet de traînée) */
-        .custom-cursor-dot::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--cursor-trail-color);
-            transform: translate(-50%, -50%);
-            transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
-            opacity: 0; /* Caché par défaut */
-        }
-        
-        /* Le point central au survol */
-        .custom-cursor-dot.hover-target {
-            width: 8px; /* Le point se rétrécit */
-            height: 8px;
-            background: var(--cursor-color);
-            border: none;
             box-shadow: 0 0 15px var(--cursor-color);
         }
 
-        /* Le tracer apparaît au survol */
-        .custom-cursor-dot.hover-target::before {
-            opacity: 1;
-            width: 48px; /* Le tracer s'élargit */
-            height: 48px;
+        .custom-cursor-dot.hover-target {
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: 2px solid var(--cursor-color);
         }
-        
-        /* Règle pour les appareils non-PC (mobile/tablette) */
+
+        /* ======================================
+           RESPONSIVE
+           ====================================== */
         @media (max-width: 992px) {
-            .theme-toggle-container { display: none !important; }
-            .d-lg-none .theme-toggle-btn { position: static; margin-right: 10px; }
-            a, button, .accordion-button, .card, .nav-link, .list-group-item, .badge, .btn, .form-control, .theme-toggle-btn { cursor: pointer !important; }
-            body { cursor: auto; }
-            .custom-cursor-dot { display: none; }
+            .theme-toggle-container {
+                display: none !important;
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            a, button, .accordion-button, .card, .nav-link, .list-group-item, 
+            .badge, .btn, .form-control, .theme-toggle-btn {
+                cursor: pointer !important;
+            }
+
+            body {
+                cursor: auto;
+            }
+
+            .custom-cursor-dot {
+                display: none;
+            }
         }
 
         @media (max-width: 768px) {
-            header { padding: 3rem 1rem; }
-            header h1 { font-size: 2rem; }
-            section { padding: 2rem 1rem; }
+            header {
+                padding: 3rem 1rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 2rem 1rem;
+            }
         }
     </style>
 </head>
 <body>
     
+    <!-- Bouton de changement de thème (Desktop) -->
     <div class="theme-toggle-container d-none d-lg-block">
         <button class="theme-toggle-btn" id="theme-toggle-btn-desktop" aria-label="Toggle theme">
             <i class="bi bi-sun-fill" id="theme-icon-desktop"></i>
         </button>
     </div>
 
+    <!-- Curseur personnalisé -->
     <div class="custom-cursor-dot"></div>
     
+    <!-- Header -->
     <header class="mb-5">
         <h1>Max Porte</h1>
         <p>Étudiant en BTS SIO SISR - Alternance</p>
     </header>
 
+    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg sticky-top shadow-sm mb-4">
         <div class="container">
             <a class="navbar-brand" href="#">
@@ -346,7 +659,9 @@
         </div>
     </nav>
 
+    <!-- Contenu principal -->
     <main class="container">
+        <!-- Formation -->
         <section id="formation">
             <h2 class="section-title"><i class="bi bi-mortarboard-fill me-2"></i>Formation</h2>
             <div class="card p-4">
@@ -362,6 +677,7 @@
             </div>
         </section>
 
+        <!-- Expériences -->
         <section id="experience">
             <h2 class="section-title"><i class="bi bi-briefcase-fill me-2"></i>Expériences professionnelles</h2>
             <div class="accordion" id="expAccordion">
@@ -446,6 +762,7 @@
             </div>
         </section>
 
+        <!-- Compétences -->
         <section id="competences">
             <h2 class="section-title"><i class="bi bi-lightbulb-fill me-2"></i>Compétences</h2>
             <div class="row">
@@ -459,241 +776,4 @@
 
                     <div class="skill-category">
                         <h4><i class="bi bi-diagram-3 me-2"></i>Réseaux</h4>
-                        <span class="badge bg-success">Cisco (VLAN, Routage)</span>
-                        <span class="badge bg-success">Firewall Fortinet</span>
-                        <span class="badge bg-warning text-dark">TCP/IP</span>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="skill-category">
-                        <h4><i class="bi bi-tools me-2"></i>Outils & Expertise</h4>
-                        <div class="progress">
-                            <div class="progress-bar bg-info" style="width: 90%" data-label="Active Directory (90%)"></div>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar bg-warning" style="width: 85%" data-label="GPO (85%)"></div>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar bg-danger" style="width: 80%" data-label="Maintenance (80%)"></div>
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar bg-success" style="width: 75%" data-label="Support Utilisateur (75%)"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="interets">
-            <h2 class="section-title"><i class="bi bi-heart-fill me-2"></i>Centres d'intérêt</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <ul class="list-group">
-                        <li class="list-group-item d-flex align-items-center">
-                            <i class="bi bi-pc-display me-3 text-primary fs-5"></i>
-                            <span class="fw-semibold">Informatique & Technologies</span>
-                        </li>
-                        <li class="list-group-item d-flex align-items-center">
-                            <i class="bi bi-music-note-beamed me-3 text-success fs-5"></i>
-                            <span class="fw-semibold">Musique</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-6">
-                    <ul class="list-group">
-                        <li class="list-group-item d-flex align-items-center">
-                            <i class="bi bi-tools me-3 text-warning fs-5"></i>
-                            <span class="fw-semibold">Mécanique automobile</span>
-                        </li>
-                        <li class="list-group-item d-flex align-items-center">
-                            <i class="bi bi-controller me-3 text-danger fs-5"></i>
-                            <span class="fw-semibold">Sport</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact">
-            <h2 class="section-title"><i class="bi bi-envelope-fill me-2"></i>Contact</h2>
-            <div class="card p-5">
-                <p class="mb-4 text-center">
-                    <a href="mailto:max.porte1234@gmail.com" class="btn btn-outline-primary btn-lg me-2 mb-2">
-                        <i class="bi bi-envelope me-2"></i>Envoyer un email
-                    </a>
-                    <a href="https://raw.githubusercontent.com/maxprte/cv_html_statique/main/Max-PORTE-FlowCV-Resume-20251022.pdf"
-                    class="btn btn-outline-danger btn-lg mb-2"
-                    download="Max-PORTE-FlowCV-Resume-20251022.pdf">
-                        <i class="bi bi-file-earmark-pdf me-2"></i>Télécharger mon CV
-                    </a>
-                </p>
-                <p class="mt-3 fs-5 text-center">
-                    <i class="bi bi-github me-2"></i>Retrouvez-me sur GitHub :
-                    <a href="https://github.com/maxprte" target="_blank" rel="noopener noreferrer" class="fw-bold text-decoration-none">@maxprte</a>
-                </p>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p class="mb-0">© 2025 Max Porte - CV en ligne</p>
-        <p class="mt-2 opacity-75">Fait avec <i class="bi bi-heart-fill text-danger"></i></p>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            // =======================================
-            // LOGIQUE DU MODE SOMBRE/CLAIR 🌙☀️
-            // =======================================
-            const htmlElement = document.documentElement; 
-            const themeToggleBtnDesktop = document.getElementById('theme-toggle-btn-desktop');
-            const themeIconDesktop = document.getElementById('theme-icon-desktop');
-            const themeToggleBtnMobile = document.getElementById('theme-toggle-btn-mobile');
-            const themeIconMobile = document.getElementById('theme-icon-mobile');
-
-            function applyTheme(theme) {
-                const isDark = theme === 'dark';
-                htmlElement.setAttribute('data-bs-theme', theme);
-                const iconClass = isDark ? 'bi bi-moon-fill' : 'bi bi-sun-fill';
-                
-                if(themeIconDesktop) themeIconDesktop.className = iconClass;
-                if(themeIconMobile) themeIconMobile.className = iconClass; 
-                
-                localStorage.setItem('theme', theme); 
-            }
-
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                applyTheme(savedTheme);
-            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                applyTheme('dark');
-            } else {
-                applyTheme('light');
-            }
-
-            if (themeToggleBtnDesktop) {
-                themeToggleBtnDesktop.addEventListener('click', () => {
-                    const currentTheme = htmlElement.getAttribute('data-bs-theme');
-                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                    applyTheme(newTheme);
-                });
-            }
-            if (themeToggleBtnMobile) {
-                themeToggleBtnMobile.addEventListener('click', () => {
-                    const currentTheme = htmlElement.getAttribute('data-bs-theme');
-                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                    applyTheme(newTheme);
-                });
-            }
-
-            // =======================================
-            // GESTION DU DÉFILEMENT FLUIDE DES ANCRES
-            // =======================================
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    if (this.getAttribute('href') === '#') return;
-                    
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-
-                    if (targetElement) {
-                        e.preventDefault(); 
-                        const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 0;
-                        
-                        window.scrollTo({
-                            top: targetElement.offsetTop - navbarHeight - 20,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-
-
-            // Animation des sections au scroll
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animation = 'fade-y-in 0.6s ease-out';
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('section').forEach(section => {
-                observer.observe(section);
-            });
-
-            // Animation des barres de progression
-            const progressObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.querySelectorAll('.progress-bar').forEach(bar => {
-                            const label = bar.dataset.label;
-                            const width = bar.style.width;
-
-                            // Évite de réanimer si déjà fait
-                            if (bar.style.width === width) return;
-
-                            bar.style.width = '0';
-                            
-                            setTimeout(() => {
-                                bar.style.width = width;
-                                bar.innerHTML = `<span>${label}</span>`;
-                            }, 400);
-                        });
-                        progressObserver.unobserve(entry.target); // Stop observing after first animation
-                    }
-                });
-            }, { threshold: 0.8 });
-
-            document.querySelectorAll('#competences').forEach(section => {
-                progressObserver.observe(section);
-            });
-
-
-            // =======================================
-            // LOGIQUE DU NOUVEAU CURSEUR SIMPLE (DOT) 🖱️
-            // =======================================
-            const cursorDot = document.querySelector('.custom-cursor-dot');
-            const interactiveElements = 'a, button, .accordion-button, .card, .nav-link, .list-group-item, .badge, .btn';
-            
-            if (cursorDot && window.matchMedia('(min-width: 993px)').matches) {
-                let mouseX = 0;
-                let mouseY = 0;
-                let dotX = 0;
-                let dotY = 0;
-                const speedDot = 0.1; 
-
-                window.addEventListener('mousemove', (e) => {
-                    mouseX = e.clientX;
-                    mouseY = e.clientY;
-                });
-
-                function animateCursor() {
-                    dotX += (mouseX - dotX) * speedDot;
-                    dotY += (mouseY - dotY) * speedDot;
-                    cursorDot.style.left = `${dotX}px`;
-                    cursorDot.style.top = `${dotY}px`;
-
-                    requestAnimationFrame(animateCursor);
-                }
-                animateCursor();
-
-                document.querySelectorAll(interactiveElements).forEach(element => {
-                    element.addEventListener('mouseenter', () => {
-                        cursorDot.classList.add('hover-target');
-                    });
-                    element.addEventListener('mouseleave', () => {
-                        cursorDot.classList.remove('hover-target');
-                    });
-                });
-            }
-            // =======================================
-            // FIN LOGIQUE CURSEUR SIMPLE
-            // =======================================
-        });
-    </script>
-</body>
-</html>
+                        <span
