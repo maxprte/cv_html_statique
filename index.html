@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="fr" data-bs-theme="light"> <head>
+<html lang="fr" data-bs-theme="light"> 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="CV en ligne de Max Porte - Étudiant BTS SIO SISR, compétences en informatique, réseaux et systèmes.">
@@ -14,10 +15,9 @@
         ====================================== */
         :root,
         [data-bs-theme="light"] {
-            /* Couleurs primaires/secondaires Bootstrap */
             --primary-color: #0d6efd;
             --secondary-color: #6610f2;
-            /* Couleurs du thème Clair */
+            --header-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --body-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             --card-bg: #ffffff;
             --text-primary: #212529;
@@ -33,167 +33,185 @@
         VARIABLES CSS (Mode Sombre) 🌙
         ====================================== */
         [data-bs-theme="dark"] {
-            /* Maintient les couleurs primaires/secondaires Bootstrap */
             --primary-color: #0d6efd;
             --secondary-color: #6610f2;
-            /* Couleurs du thème Sombre */
-            --body-bg: #1a1d29; /* Fond sombre uni */
-            --card-bg: #2a2e40; /* Cartes/éléments plus clairs que le fond */
-            --text-primary: #f8f9fa; /* Texte clair */
-            --text-secondary: #adb5bd; /* Texte secondaire gris clair */
-            --navbar-bg: rgba(33, 37, 41, 0.95); /* Barre de navigation sombre */
+            --header-gradient: linear-gradient(135deg, #4455bb 0%, #5e3a89 100%);
+            --body-bg: #1a1d29;
+            --card-bg: #2a2e40;
+            --text-primary: #f8f9fa;
+            --text-secondary: #adb5bd;
+            --navbar-bg: rgba(33, 37, 41, 0.95);
             --accordion-bg: #343a40;
             --progress-bg: #495057;
             --skill-category-bg: #343a40;
-            --cursor-color: #9f7aea; /* Curseur violet plus clair */
+            --cursor-color: #9f7aea;
             
-            /* Surcharge des couleurs spécifiques à Bootstrap pour les badges, etc. */
             --bs-body-bg: var(--body-bg);
             --bs-body-color: var(--text-primary);
         }
 
         /* ======================================
-        STYLES GÉNÉRAUX & CURSEUR
+        STYLES GÉNÉRAUX & FLUIDIFICATION
         ====================================== */
         body {
             cursor: none;
             font-family: 'Segoe UI', system-ui, sans-serif;
             line-height: 1.6;
             scroll-behavior: smooth;
-            background: var(--body-bg); /* Utilise la variable pour le fond */
+            background: var(--body-bg);
             min-height: 100vh;
-            color: var(--text-primary); /* Utilise la variable pour le texte */
-            transition: background 0.5s, color 0.5s; /* Transition fluide entre les modes */
+            color: var(--text-primary);
+            transition: background 0.5s, color 0.5s;
         }
        
-        /* Le 'dot' principal */
-        .custom-cursor-dot {
-            width: 10px; 
-            height: 10px;
-            background-color: var(--cursor-color);
-            border-radius: 50%;
-            pointer-events: none;
-            position: fixed;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: all 0.1s ease-out;
+        /* Structure principale avec coins arrondis pour le contenu */
+        main.container {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
         }
 
-        /* Styles pour les éléments interactifs */
-        a, button, .accordion-button, .card, .nav-link, .list-group-item, .badge {
-            cursor: none;
-        }
-
-        /* Effet sur le dot lorsque la souris est sur un élément interactif */
-        .custom-cursor-dot.hover-target {
-            width: 24px;
-            height: 4px;
-            background-color: var(--primary-color);
-            border-radius: 2px;
-            transform: translate(-50%, -50%) rotate(0deg); 
-        }
-
-        /* Ajout d'une pseudo-classe pour former la croix verticale */
-        .custom-cursor-dot.hover-target::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 4px; 
-            height: 24px; 
-            background-color: var(--primary-color);
-            border-radius: 2px;
-            transform: translate(-50%, -50%);
-        }
-
-        /* Remet le dot à l'état initial */
-        .custom-cursor-dot:not(.hover-target)::after {
-            content: none;
-        }
-        
-        /* Masquer le curseur sur mobile */
-        @media (max-width: 992px) {
-            .custom-cursor-dot {
-                display: none;
-            }
-            body {
-                cursor: auto;
-            }
-            a, button, .accordion-button, .card:hover, .nav-link, .list-group-item, .badge {
-                cursor: pointer;
-            }
-        }
-        
         /* ======================================
-        HEADER & FOOTER (Gradients Inchangés pour un effet "pop")
+        HEADER - Nouveauté : Coins arrondis en bas
         ====================================== */
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--header-gradient);
             color: #fff;
             text-align: center;
             padding: 3rem 1rem 3rem;
             position: relative;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            /* COINS ARRONDIS */
+            border-bottom-left-radius: 20px; /* Bord en bas à gauche */
+            border-bottom-right-radius: 20px; /* Bord en bas à droite */
         }
 
-        /* ... (Les styles d'animation et de fond de header restent inchangés) ... */
-
-        footer {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-            padding: 2.5rem 1rem;
-            margin-top: 3rem;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.15);
+        /* Animation et fond du header (conservées) */
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+            z-index: 0;
+        }
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        header h1, header p {
+            position: relative;
+            z-index: 1;
         }
 
-        .btn-primary-custom {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            /* ... autres styles ... */
-        }
-        
         /* ======================================
-        NAVIGATION & ÉLÉMENTS PRINCIPAUX
+        BARRE DE NAVIGATION & SÉLECTEUR DE THÈME
         ====================================== */
         nav.navbar {
             backdrop-filter: blur(10px);
-            background-color: var(--navbar-bg) !important; /* Utilise la variable */
+            background-color: var(--navbar-bg) !important;
             box-shadow: 0 2px 20px rgba(0,0,0,0.1);
             transition: background-color 0.5s, box-shadow 0.5s;
         }
 
         .navbar-brand {
+            font-weight: 700;
             color: var(--primary-color) !important;
+            font-size: 1.3rem;
         }
 
-        .nav-link {
-             color: var(--text-primary) !important; /* Assure la couleur du texte dans la nav */
-        }
-        .nav-link::after {
-            background: var(--primary-color);
+        /* SÉLECTEUR DE THÈME - Positionnement fixe en haut à droite */
+        .theme-toggle-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050; /* Au-dessus de la navbar (1040) */
+            background-color: var(--card-bg);
+            border-radius: 50%;
+            padding: 5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: background-color 0.5s, box-shadow 0.5s;
         }
 
-        .card {
-            background: var(--card-bg); /* Utilise la variable */
+        .theme-toggle-btn {
+            background: none;
+            border: none;
             color: var(--text-primary);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Ombre légère pour le clair */
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.5s, color 0.5s;
+            transition: color 0.3s, transform 0.3s;
+            font-size: 1.5rem;
+            line-height: 1;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .theme-toggle-btn:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
         }
         
+        @media (max-width: 992px) {
+             .theme-toggle-container {
+                position: static; /* Supprime la position fixe sur mobile */
+                box-shadow: none;
+                padding: 0;
+                margin-left: auto;
+                background-color: transparent;
+            }
+            .theme-toggle-btn {
+                 color: var(--text-primary);
+            }
+        }
+
+
+        /* ======================================
+        CARTES ET ÉLÉMENTS INTERACTIFS
+        ====================================== */
+        .card, .skill-category {
+            border: none;
+            border-radius: 20px; /* Coins arrondis pour les cartes */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.5s, color 0.5s;
+            background: var(--card-bg);
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 1.5rem; /* Ajoute un espacement entre les cartes/sections */
+        }
+        .card:last-child, .skill-category:last-child {
+            margin-bottom: 0; /* Pas d'espacement après la dernière carte/catégorie d'une section */
+        }
+
         [data-bs-theme="dark"] .card {
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Ombre plus prononcée pour le sombre */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
         }
 
-        .card:hover::before {
-            transform: scaleX(1);
+        /* LIST GROUP ITEMS */
+        .list-group-item {
+            border: none;
+            border-radius: 15px !important;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+            background: var(--card-bg);
+            color: var(--text-primary);
         }
 
-        /* ACCORDION */
+        .list-group-item:hover {
+            transform: translateX(5px);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        /* ACCORDION (similaire à l'original, utilise les variables) */
         .accordion-item {
             background-color: var(--accordion-bg);
-            border-color: var(--text-secondary);
+            border-radius: 15px !important;
+            margin-bottom: 1rem; /* Espacement entre les items de l'accordéon */
+            overflow: hidden; /* Assure que les coins arrondis sont respectés */
         }
         .accordion-button {
             background-color: var(--accordion-bg);
@@ -202,64 +220,90 @@
         .accordion-button:not(.collapsed) {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            border-bottom-left-radius: 0; /* Pas de coins arrondis en bas quand ouvert */
+            border-bottom-right-radius: 0;
         }
-        .accordion-body {
-            background-color: var(--card-bg);
-            color: var(--text-primary);
-        }
-
-        /* LISTE DE COMPÉTENCES */
-        .list-group-item {
-            background: var(--card-bg);
-            color: var(--text-primary);
-        }
-
-        .skill-category {
-            background: var(--skill-category-bg);
-            color: var(--text-primary);
-        }
-
-        .progress {
-            background-color: var(--progress-bg);
+        .accordion-item:last-child {
+            margin-bottom: 0;
         }
 
         /* TITRES DE SECTION */
         .section-title {
             color: var(--primary-color);
-            border-bottom-color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+        
+        /* ======================================
+        FOOTER - Nouveauté : Coins arrondis en haut
+        ====================================== */
+        footer {
+            background: var(--header-gradient);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            margin-top: 3rem;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.15);
+            /* COINS ARRONDIS */
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
         }
 
-        /* ICONE DE CHANGEMENT DE THÈME */
-        .theme-toggle-btn {
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            transition: color 0.3s;
-            margin-left: 1rem;
-            font-size: 1.25rem;
-        }
-        .theme-toggle-btn:hover {
-            color: var(--primary-color);
-        }
 
+        /* ======================================
+        CURSEUR (Styles conservés)
+        ====================================== */
+        .custom-cursor-dot {
+            width: 10px; height: 10px; background-color: var(--cursor-color); border-radius: 50%; pointer-events: none; position: fixed; z-index: 9999; transform: translate(-50%, -50%); transition: all 0.1s ease-out;
+        }
+        .custom-cursor-dot.hover-target {
+            width: 24px; height: 4px; background-color: var(--primary-color); border-radius: 2px; transform: translate(-50%, -50%) rotate(0deg); 
+        }
+        .custom-cursor-dot.hover-target::after {
+            content: ""; position: absolute; top: 50%; left: 50%; width: 4px; height: 24px; background-color: var(--primary-color); border-radius: 2px; transform: translate(-50%, -50%);
+        }
+        .custom-cursor-dot:not(.hover-target)::after {
+            content: none;
+        }
+        @media (max-width: 992px) {
+            .custom-cursor-dot { display: none; }
+            body { cursor: auto; }
+            a, button, .accordion-button, .card:hover, .nav-link, .list-group-item, .badge { cursor: pointer; }
+        }
+        
     </style>
 </head>
 <body>
     
+    <div class="theme-toggle-container d-none d-lg-block">
+        <button class="theme-toggle-btn" id="theme-toggle-btn-desktop" aria-label="Toggle theme">
+            <i class="bi bi-sun-fill" id="theme-icon-desktop"></i>
+        </button>
+    </div>
+
     <div class="custom-cursor-dot"></div>
+    
     <header class="mb-5">
         <h1>Max Porte</h1>
         <p>Étudiant en BTS SIO SISR - Alternance</p>
     </header>
 
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm mb-4">
+    <nav class="navbar navbar-expand-lg sticky-top shadow-sm mb-4">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#">
+            <a class="navbar-brand" href="#">
                 <i class="bi bi-person-badge me-2"></i>CV Max Porte
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <div class="d-flex align-items-center d-lg-none">
+                 <button class="theme-toggle-btn me-2" id="theme-toggle-btn-mobile" aria-label="Toggle theme">
+                    <i class="bi bi-sun-fill" id="theme-icon-mobile"></i>
+                </button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item"><a class="nav-link" href="#formation">Formation</a></li>
@@ -267,11 +311,6 @@
                     <li class="nav-item"><a class="nav-link" href="#competences">Compétences</a></li>
                     <li class="nav-item"><a class="nav-link" href="#interets">Centres d'intérêt</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                    <li class="nav-item">
-                        <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle theme">
-                            <i class="bi bi-sun-fill" id="theme-icon"></i>
-                        </button>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -460,7 +499,7 @@
                     </a>
                 </p>
                 <p class="mt-3 fs-5">
-                    <i class="bi bi-github me-2"></i>Retrouvez-moi sur GitHub :
+                    <i class="bi bi-github me-2"></i>Retrouvez-me sur GitHub :
                     <a href="https://github.com/maxprte" target="_blank" rel="noopener noreferrer" class="fw-bold text-decoration-none">@maxprte</a>
                 </p>
             </div>
@@ -478,17 +517,25 @@
             
             // =======================================
             // LOGIQUE DU MODE SOMBRE/CLAIR 🌙☀️
+            // Gère les boutons du bureau et du mobile
             // =======================================
-            const themeToggleBtn = document.getElementById('theme-toggle-btn');
-            const themeIcon = document.getElementById('theme-icon');
-            const htmlElement = document.documentElement; // Le tag <html>
+            const htmlElement = document.documentElement; 
+            const themeToggleBtnDesktop = document.getElementById('theme-toggle-btn-desktop');
+            const themeIconDesktop = document.getElementById('theme-icon-desktop');
+            const themeToggleBtnMobile = document.getElementById('theme-toggle-btn-mobile');
+            const themeIconMobile = document.getElementById('theme-icon-mobile');
 
             // 1. Fonction pour appliquer le thème
             function applyTheme(theme) {
                 const isDark = theme === 'dark';
                 htmlElement.setAttribute('data-bs-theme', theme);
-                themeIcon.className = isDark ? 'bi bi-moon-fill' : 'bi bi-sun-fill'; // Changement d'icône
-                localStorage.setItem('theme', theme); // Sauvegarde dans le local storage
+                const iconClass = isDark ? 'bi bi-moon-fill' : 'bi bi-sun-fill';
+                
+                // Met à jour les deux icônes
+                if(themeIconDesktop) themeIconDesktop.className = iconClass;
+                if(themeIconMobile) themeIconMobile.className = iconClass; 
+                
+                localStorage.setItem('theme', theme); 
             }
 
             // 2. Charger le thème à l'ouverture de la page
@@ -496,18 +543,26 @@
             if (savedTheme) {
                 applyTheme(savedTheme);
             } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                // Utilise la préférence système si aucun thème n'est enregistré
                 applyTheme('dark');
             } else {
                 applyTheme('light');
             }
 
-            // 3. Écouteur pour le clic sur le bouton
-            themeToggleBtn.addEventListener('click', () => {
-                const currentTheme = htmlElement.getAttribute('data-bs-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                applyTheme(newTheme);
-            });
+            // 3. Écouteurs pour le clic sur les boutons (desktop et mobile)
+            if (themeToggleBtnDesktop) {
+                themeToggleBtnDesktop.addEventListener('click', () => {
+                    const currentTheme = htmlElement.getAttribute('data-bs-theme');
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    applyTheme(newTheme);
+                });
+            }
+            if (themeToggleBtnMobile) {
+                themeToggleBtnMobile.addEventListener('click', () => {
+                    const currentTheme = htmlElement.getAttribute('data-bs-theme');
+                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    applyTheme(newTheme);
+                });
+            }
 
             // =======================================
             // GESTION DU DÉFILEMENT FLUIDE DES ANCRES
@@ -524,7 +579,7 @@
                         const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 0;
                         
                         window.scrollTo({
-                            top: targetElement.offsetTop - navbarHeight,
+                            top: targetElement.offsetTop - navbarHeight - 20, // Ajout d'un petit offset
                             behavior: 'smooth'
                         });
                     }
@@ -535,11 +590,14 @@
             // =======================================
 
 
-            // Animation des sections au scroll
+            // Animation des sections au scroll (gardée)
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.style.animation = 'fadeIn 0.6s ease-out';
+                    } else {
+                        // Optionnel : Réinitialiser l'animation si l'élément n'est plus visible
+                        // entry.target.style.animation = 'none'; 
                     }
                 });
             }, { threshold: 0.1 });
@@ -548,17 +606,19 @@
                 observer.observe(section);
             });
 
-            // Animation des barres de progression
+            // Animation des barres de progression (gardée)
             document.querySelectorAll('.progress-bar').forEach(bar => {
                 const width = bar.style.width;
-                bar.style.width = '0';
+                bar.style.width = '0'; // Initialisation pour l'animation
                 setTimeout(() => {
                     bar.style.width = width;
-                }, 300);
+                    bar.textContent = bar.dataset.label; // Affiche le label après l'animation
+                }, 400); // Lancement de l'animation après un court délai
             });
 
             // =======================================
             // LOGIQUE DU NOUVEAU CURSEUR SIMPLE (DOT) 🖱️
+            // (Code inchangé)
             // =======================================
             const cursorDot = document.querySelector('.custom-cursor-dot');
             const interactiveElements = 'a, button, .accordion-button, .card, .nav-link, .list-group-item, .badge';
@@ -570,15 +630,12 @@
                 let dotY = 0;
                 const speedDot = 0.1; 
 
-                // 1. Mettre à jour la position de la souris
                 window.addEventListener('mousemove', (e) => {
                     mouseX = e.clientX;
                     mouseY = e.clientY;
                 });
 
-                // 2. Animer le curseur
                 function animateCursor() {
-                    // Interpolation linéaire pour le 'dot'
                     dotX += (mouseX - dotX) * speedDot;
                     dotY += (mouseY - dotY) * speedDot;
                     cursorDot.style.left = `${dotX}px`;
@@ -586,10 +643,8 @@
 
                     requestAnimationFrame(animateCursor);
                 }
-
                 animateCursor();
 
-                // 3. Gérer les interactions (hover)
                 document.querySelectorAll(interactiveElements).forEach(element => {
                     element.addEventListener('mouseenter', () => {
                         cursorDot.classList.add('hover-target');
