@@ -29,6 +29,7 @@
             --card-hover-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             --card-inner-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
             --badge-inner-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+            --cursor-trail-color: rgba(118, 75, 162, 0.1); /* NOUVEAU */
         }
 
         /* ======================================
@@ -49,12 +50,13 @@
             --card-hover-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             --card-inner-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
             --badge-inner-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.15);
+            --cursor-trail-color: rgba(159, 122, 234, 0.1); /* NOUVEAU */
             --bs-body-bg: var(--body-bg);
             --bs-body-color: var(--text-primary);
         }
 
         /* ======================================
-        STYLES GÉNÉRAUX & FLUIDITÉ
+        STYLES GÉNÉRAUX & ANIMATIONS
         ====================================== */
         * {
             margin: 0;
@@ -75,7 +77,7 @@
             overflow-x: hidden;
         }
 
-        /* CURSEUR FIXE : empêche le curseur par défaut sur tous les éléments interactifs */
+        /* CURSEUR FIXE : empêche le curseur par défaut */
         a, button, .accordion-button, .card, .nav-link, .list-group-item, 
         .badge, .btn, .form-control, .theme-toggle-btn {
             cursor: none !important;
@@ -85,12 +87,41 @@
             padding: 4rem 1rem;
         }
         
-        /* Animation de base pour l'intersection observer */
-        @keyframes fadeInUp {
+        /* Regroupement des keyframes de transition Y */
+        @keyframes fade-y-in {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 60%; }
+        }
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        @keyframes pulse-shadow {
+            0% { box-shadow: 0 0 0 0 var(--primary-color); }
+            70% { box-shadow: 0 0 0 15px rgba(13, 110, 253, 0); }
+            100% { box-shadow: 0 0 0 0 var(--primary-color); }
+        }
+        @keyframes pulse-danger {
+            0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(220, 53, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+        }
 
+        /* ======================================
+        TITRES DE SECTION
+        ====================================== */
         .section-title {
             font-size: 2.5rem;
             font-weight: 700;
@@ -113,17 +144,15 @@
         }
 
         /* ======================================
-        BARRE DE NAVIGATION & THÈME
+        NAVIGATION & THÈME
         ====================================== */
         nav.navbar {
             backdrop-filter: blur(20px) saturate(180%);
             background-color: var(--navbar-bg) !important;
             box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* SÉLECTEUR DE THÈME - Positionnement fixe (Desktop) */
         .theme-toggle-container {
             position: fixed;
             top: 20px;
@@ -133,145 +162,147 @@
             border-radius: 50%;
             padding: 5px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle-container:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(0,0,0,0.25);
-        }
-
-        .theme-toggle-btn {
-            background: var(--header-gradient);
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle-btn:hover {
-            transform: rotate(180deg);
-        }
-
-        /* Correction Mobile */
-        @media (max-width: 992px) {
-            .theme-toggle-container {
-                display: none !important;
-            }
-             .d-lg-none .theme-toggle-btn {
-                position: static;
-                margin-right: 10px;
-            }
-             a, button, .accordion-button, .card, .nav-link, .list-group-item, .badge, 
-             .btn, .form-control, .theme-toggle-btn {
-                cursor: pointer !important;
-            }
-            body { cursor: auto; }
-            .custom-cursor-dot { display: none; }
         }
 
         /* ======================================
-        HEADER & FOOTER - MODIFIÉ
+        HEADER & FOOTER
         ====================================== */
         header {
             background: var(--header-gradient);
-            padding: 5rem 2rem;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             border-bottom-left-radius: 20px;
             border-bottom-right-radius: 20px;
         }
+        header h1 {
+            animation: fade-y-in 0.8s ease-out; /* Utilisé le keyframe regroupé */
+        }
         
         footer {
             background: var(--header-gradient);
-            color: white;
-            text-align: center;
-            padding: 1.5rem; /* RÉDUIT */
-            margin-top: 4rem;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            padding: 1.5rem;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
         }
+        footer i.bi-heart-fill {
+            animation: heartbeat 1.5s infinite;
+        }
         
-        /* FOOTER : Centrage du contenu */
-        footer p {
-            font-size: 0.9rem !important;
-            margin: 0 auto;
-        }
-        footer .fs-5 {
-             font-size: 1rem !important;
-        }
-
         /* ======================================
         CARTES ET ÉLÉMENTS INTERACTIFS
         ====================================== */
         .card {
-            border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08), var(--card-inner-shadow);
             background: var(--card-bg);
-            margin-bottom: 2rem;
         }
-
         .card:hover {
             transform: translateY(-8px) scale(1.01);
             box-shadow: var(--card-hover-shadow), var(--card-inner-shadow);
         }
-        
+
         /* ACCORDION */
         .accordion-item {
             background-color: var(--card-secondary-bg);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08), var(--card-inner-shadow);
-            margin-bottom: 1.5rem;
+        }
+        .accordion-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-hover-shadow), var(--card-inner-shadow);
         }
 
         /* LIST GROUP ITEMS */
         .list-group-item {
             background: var(--card-secondary-bg);
             box-shadow: var(--card-inner-shadow);
-            margin-bottom: 1rem;
-            padding: 1.25rem;
+        }
+        .list-group-item:hover {
+            background: var(--header-gradient);
+            color: white;
+            box-shadow: var(--card-hover-shadow);
         }
 
         /* COMPÉTENCES */
         .skill-category {
             background: var(--card-secondary-bg);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08), var(--card-inner-shadow);
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-        .skill-category:hover {
-             transform: translateY(-5px);
-             box-shadow: var(--card-hover-shadow), var(--card-inner-shadow);
         }
         .badge {
             box-shadow: var(--badge-inner-shadow);
-            margin: 0.3rem 0.75rem 0.75rem 0;
         }
-
-        /* BARRES DE PROGRESSION - MODIFIÉ */
-        .progress-bar {
-            /* Retrait du padding-left pour centrer le texte ou le laisser géré par le conteneur */
-            padding: 0 0.5rem;
-        }
-        /* Style pour centrer le texte de la barre */
+        
+        /* BARRES DE PROGRESSION */
         .progress-bar span {
             display: block;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
-        
-        /* BOUTONS (Effet de lueur/pulse) */
-        /* ... (Styles conservés pour les boutons) ... */
 
-        /* Curseur personnalisé (styles inchangés) */
+        /* BOUTONS (Effet de lueur/pulse) */
+        .btn-outline-primary:hover { animation: pulse-shadow 1.5s infinite; }
+        .btn-outline-danger:hover { animation: pulse-danger 1.5s infinite; }
+
+        /* ======================================
+        CURSEUR PERSONNALISÉ - AMÉLIORÉ
+        ====================================== */
+        /* Le point central */
         .custom-cursor-dot {
-            width: 12px; height: 12px; background: var(--cursor-color); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.15s ease, background 0.3s ease, width 0.3s ease, height 0.3s ease; box-shadow: 0 0 15px var(--cursor-color);
+            width: 12px;
+            height: 12px;
+            background: var(--cursor-color);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.15s ease, background 0.3s ease, width 0.3s ease, height 0.3s ease;
+            box-shadow: 0 0 10px var(--cursor-color); /* Légère lueur */
+        }
+
+        /* Le tracer (nouvel élément pour l'effet de traînée) */
+        .custom-cursor-dot::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--cursor-trail-color);
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+            opacity: 0; /* Caché par défaut */
         }
         
+        /* Le point central au survol */
+        .custom-cursor-dot.hover-target {
+            width: 8px; /* Le point se rétrécit */
+            height: 8px;
+            background: var(--cursor-color);
+            border: none;
+            box-shadow: 0 0 15px var(--cursor-color);
+        }
+
+        /* Le tracer apparaît au survol */
+        .custom-cursor-dot.hover-target::before {
+            opacity: 1;
+            width: 48px; /* Le tracer s'élargit */
+            height: 48px;
+        }
+        
+        /* Règle pour les appareils non-PC (mobile/tablette) */
+        @media (max-width: 992px) {
+            .theme-toggle-container { display: none !important; }
+            .d-lg-none .theme-toggle-btn { position: static; margin-right: 10px; }
+            a, button, .accordion-button, .card, .nav-link, .list-group-item, .badge, .btn, .form-control, .theme-toggle-btn { cursor: pointer !important; }
+            body { cursor: auto; }
+            .custom-cursor-dot { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 3rem 1rem; }
+            header h1 { font-size: 2rem; }
+            section { padding: 2rem 1rem; }
+        }
     </style>
 </head>
 <body>
@@ -585,7 +616,7 @@
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.style.animation = 'fadeInUp 0.6s ease-out';
+                        entry.target.style.animation = 'fade-y-in 0.6s ease-out';
                     }
                 });
             }, { threshold: 0.1 });
@@ -594,22 +625,33 @@
                 observer.observe(section);
             });
 
-            // Animation des barres de progression - MODIFIÉ
-            document.querySelectorAll('.progress-bar').forEach(bar => {
-                // Lis le nom et le pourcentage à partir de l'attribut data-label
-                const label = bar.dataset.label;
-                const width = bar.style.width;
+            // Animation des barres de progression
+            const progressObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.querySelectorAll('.progress-bar').forEach(bar => {
+                            const label = bar.dataset.label;
+                            const width = bar.style.width;
 
-                // Initialise la barre à 0%
-                bar.style.width = '0';
-                
-                // Démarre l'animation après un délai
-                setTimeout(() => {
-                    bar.style.width = width;
-                    // Injecte le texte dans la barre
-                    bar.innerHTML = `<span>${label}</span>`;
-                }, 400);
+                            // Évite de réanimer si déjà fait
+                            if (bar.style.width === width) return;
+
+                            bar.style.width = '0';
+                            
+                            setTimeout(() => {
+                                bar.style.width = width;
+                                bar.innerHTML = `<span>${label}</span>`;
+                            }, 400);
+                        });
+                        progressObserver.unobserve(entry.target); // Stop observing after first animation
+                    }
+                });
+            }, { threshold: 0.8 });
+
+            document.querySelectorAll('#competences').forEach(section => {
+                progressObserver.observe(section);
             });
+
 
             // =======================================
             // LOGIQUE DU NOUVEAU CURSEUR SIMPLE (DOT) 🖱️
