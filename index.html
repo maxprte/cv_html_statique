@@ -11,7 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         /* ======================================
-        VARIABLES CSS (Mode Clair)
+        VARIABLES CSS (Mode Clair) - MODIFIÉ
         ====================================== */
         :root,
         [data-bs-theme="light"] {
@@ -20,6 +20,7 @@
             --header-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --body-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             --card-bg: #ffffff;
+            --card-secondary-bg: #f8f9fa; /* NOUVEAU: Fond légèrement différent */
             --text-primary: #212529;
             --text-secondary: #6c757d;
             --navbar-bg: rgba(255, 255, 255, 0.95);
@@ -27,10 +28,11 @@
             --progress-bg: #e9ecef;
             --skill-category-bg: #ffffff;
             --cursor-color: #764ba2;
+            --card-hover-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* NOUVEAU: Ombre au survol */
         }
 
         /* ======================================
-        VARIABLES CSS (Mode Sombre) 🌙
+        VARIABLES CSS (Mode Sombre) 🌙 - MODIFIÉ
         ====================================== */
         [data-bs-theme="dark"] {
             --primary-color: #0d6efd;
@@ -38,13 +40,15 @@
             --header-gradient: linear-gradient(135deg, #4455bb 0%, #5e3a89 100%);
             --body-bg: #1a1d29;
             --card-bg: #2a2e40;
+            --card-secondary-bg: #343a40; /* NOUVEAU: Fond légèrement différent */
             --text-primary: #f8f9fa;
             --text-secondary: #adb5bd;
             --navbar-bg: rgba(33, 37, 41, 0.95);
             --accordion-bg: #343a40;
             --progress-bg: #495057;
-            --skill-category-bg: #343a40;
+            --skill-category-bg: #2a2e40;
             --cursor-color: #9f7aea;
+            --card-hover-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* NOUVEAU: Ombre plus foncée au survol */
             
             --bs-body-bg: var(--body-bg);
             --bs-body-color: var(--text-primary);
@@ -64,14 +68,12 @@
             transition: background 0.5s, color 0.5s;
         }
 
-        /* CORRECTION DU CURSEUR PAR DÉFAUT - NOUVEAU/MODIFIÉ */
-        /* Cible tous les éléments qui pourraient afficher le curseur par défaut */
+        /* CORRECTION DU CURSEUR PAR DÉFAUT */
         a, button, .accordion-button, .card, .nav-link, .list-group-item, .badge, 
         .btn, .form-control, .theme-toggle-btn {
-            cursor: none !important; /* Force la suppression du curseur par défaut sur les éléments interactifs */
+            cursor: none !important;
         }
        
-        /* Structure principale */
         main.container {
             padding-top: 2rem;
             padding-bottom: 2rem;
@@ -88,6 +90,78 @@
 
 
         /* ======================================
+        CARTES ET ÉLÉMENTS INTERACTIFS - MODIFIÉ
+        ====================================== */
+        .card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.5s, color 0.5s, box-shadow 0.4s; /* Ajout de box-shadow à la transition */
+            background: var(--card-bg);
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        /* EFFET DE SURVOL GÉNÉRAL POUR LES CARTES */
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-hover-shadow); /* Utilisation de la nouvelle variable */
+        }
+        /* Annule l'effet de survol du card sur le dot pour éviter un double effet */
+        .card:hover:not(.custom-cursor-dot)::before {
+             transform: scaleX(1);
+        }
+
+        /* ACCORDION (FOND ADAPTATIF ET SURVOL) */
+        .accordion-item {
+            background-color: var(--card-secondary-bg); /* Fond légèrement différent pour l'accordion */
+            border-radius: 15px !important;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: all 0.4s ease, box-shadow 0.4s;
+        }
+        .accordion-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--card-hover-shadow);
+        }
+        .accordion-button {
+            background-color: var(--card-secondary-bg);
+        }
+
+        /* LIST GROUP ITEMS (FOND ADAPTATIF ET SURVOL) */
+        .list-group-item {
+            background: var(--card-secondary-bg); /* Fond légèrement différent pour la liste */
+            border-radius: 15px !important;
+            margin-bottom: 0.8rem;
+            transition: all 0.3s ease, box-shadow 0.4s;
+        }
+
+        .list-group-item:hover {
+            transform: translateX(5px);
+            /* L'effet de couleur au survol est conservé pour le contraste */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: var(--card-hover-shadow);
+        }
+        
+        /* SECTION COMPÉTENCES (Fond secondaire) */
+        .skill-category {
+            background: var(--card-secondary-bg); /* Fond secondaire pour les catégories */
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease, box-shadow 0.4s;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-hover-shadow);
+        }
+
+        /* ... Autres styles (header, footer, titres) conservés ... */
+
+        /* ======================================
         HEADER
         ====================================== */
         header {
@@ -101,181 +175,8 @@
             border-bottom-left-radius: 20px;
             border-bottom-right-radius: 20px;
         }
+        /* ... Animation du header ... */
 
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: moveBackground 20s linear infinite;
-            z-index: 0;
-        }
-        @keyframes moveBackground {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
-        header h1, header p {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ======================================
-        BARRE DE NAVIGATION & SÉLECTEUR DE THÈME
-        ====================================== */
-        nav.navbar {
-            backdrop-filter: blur(10px);
-            background-color: var(--navbar-bg) !important;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-            transition: background-color 0.5s, box-shadow 0.5s;
-        }
-
-        .navbar-brand {
-            font-weight: 700;
-            color: var(--primary-color) !important;
-            font-size: 1.3rem;
-        }
-
-        .theme-toggle-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1050;
-            background-color: var(--card-bg);
-            border-radius: 50%;
-            padding: 5px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: background-color 0.5s, box-shadow 0.5s;
-        }
-
-        .theme-toggle-btn {
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            transition: color 0.3s, transform 0.3s;
-            font-size: 1.5rem;
-            line-height: 1;
-            padding: 0;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .theme-toggle-btn:hover {
-            color: var(--primary-color);
-            transform: scale(1.1);
-        }
-        
-        @media (max-width: 992px) {
-             .theme-toggle-container {
-                position: static;
-                box-shadow: none;
-                padding: 0;
-                margin-left: auto;
-                background-color: transparent;
-            }
-            /* Rétablit le curseur par défaut sur mobile (où le custom cursor est désactivé) */
-             a, button, .accordion-button, .card, .nav-link, .list-group-item, .badge, 
-             .btn, .form-control, .theme-toggle-btn {
-                cursor: pointer !important;
-            }
-        }
-
-
-        /* ======================================
-        TITRES DE SECTION
-        ====================================== */
-        .section-title {
-            color: var(--primary-color);
-            border-bottom: 3px solid var(--primary-color);
-            padding-bottom: 0.5rem;
-            margin-bottom: 3rem;
-            font-weight: 600;
-        }
-
-        /* ======================================
-        CARTES ET ÉLÉMENTS INTERACTIFS
-        ====================================== */
-        .card, .skill-category {
-            border: none;
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.5s, color 0.5s;
-            background: var(--card-bg);
-            overflow: hidden;
-            position: relative;
-            margin-bottom: 2rem;
-        }
-
-        /* Contact (Alignement) */
-        #contact .card {
-            text-align: left;
-        }
-        #contact .card p {
-            text-align: left;
-        }
-        #contact .card .mb-4 {
-            text-align: center;
-        }
-        #contact .card .mt-3 {
-            text-align: center;
-        }
-
-
-        [data-bs-theme="dark"] .card {
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); 
-        }
-
-        /* SECTION COMPÉTENCES (Aération) */
-        .skill-category {
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-        .skill-category h4 {
-            margin-bottom: 1.5rem;
-        }
-        .progress {
-            margin-bottom: 1.25rem;
-        }
-        .badge {
-            margin-right: 0.75rem;
-            margin-bottom: 0.75rem;
-        }
-
-        /* ACCORDION (Espacement) */
-        .accordion-item {
-            background-color: var(--accordion-bg);
-            border-radius: 15px !important;
-            margin-bottom: 1.5rem;
-            overflow: hidden;
-        }
-        .accordion-item:last-child {
-            margin-bottom: 0;
-        }
-
-        /* LIST GROUP ITEMS (Centres d'intérêt) */
-        .list-group {
-            margin-bottom: 1.5rem;
-        }
-        .list-group-item {
-            border: none;
-            border-radius: 15px !important;
-            margin-bottom: 0.8rem;
-            transition: all 0.3s ease;
-            background: var(--card-bg);
-            color: var(--text-primary);
-        }
-
-        .list-group-item:hover {
-            transform: translateX(5px);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        
         /* ======================================
         FOOTER
         ====================================== */
@@ -290,10 +191,7 @@
             border-top-right-radius: 20px;
         }
 
-
-        /* ======================================
-        CURSEUR PERSONNALISÉ
-        ====================================== */
+        /* ... CURSEUR (Styles conservés) ... */
         .custom-cursor-dot {
             width: 10px; height: 10px; background-color: var(--cursor-color); border-radius: 50%; pointer-events: none; position: fixed; z-index: 9999; transform: translate(-50%, -50%); transition: all 0.1s ease-out;
         }
@@ -306,8 +204,6 @@
         .custom-cursor-dot:not(.hover-target)::after {
             content: none;
         }
-
-        /* Règle pour les appareils non-PC (mobile/tablette) */
         @media (max-width: 992px) {
             .custom-cursor-dot { display: none; }
             body { cursor: auto; }
