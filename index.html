@@ -20,17 +20,17 @@
             --header-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --body-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             --card-bg: #ffffff;
-            --card-secondary-bg: #f8f9fa;
+            --card-secondary-bg: #f8f9fa; 
             --text-primary: #212529;
             --text-secondary: #6c757d;
             --navbar-bg: rgba(255, 255, 255, 0.95);
             --accordion-bg: #fff;
             --progress-bg: #e9ecef;
-            --skill-category-bg: #f8f9fa; /* Alignement sur card-secondary-bg */
+            --skill-category-bg: #f8f9fa;
             --cursor-color: #764ba2;
             --card-hover-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            --card-inner-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05); /* NOUVEAU */
-            --badge-inner-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2); /* NOUVEAU */
+            --card-inner-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+            --badge-inner-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
         }
 
         /* ======================================
@@ -48,11 +48,11 @@
             --navbar-bg: rgba(33, 37, 41, 0.95);
             --accordion-bg: #343a40;
             --progress-bg: #495057;
-            --skill-category-bg: #343a40; /* Alignement sur card-secondary-bg */
+            --skill-category-bg: #343a40;
             --cursor-color: #9f7aea;
             --card-hover-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            --card-inner-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3); /* NOUVEAU */
-            --badge-inner-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.15); /* NOUVEAU */
+            --card-inner-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+            --badge-inner-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.15);
             
             --bs-body-bg: var(--body-bg);
             --bs-body-color: var(--text-primary);
@@ -92,7 +92,7 @@
             transition: background-color 0.5s, box-shadow 0.5s;
         }
 
-        /* SÉLECTEUR DE THÈME - Positionnement corrigé */
+        /* SÉLECTEUR DE THÈME - Positionnement fixe (Desktop) */
         .theme-toggle-container {
             position: fixed;
             top: 20px;
@@ -105,40 +105,57 @@
             transition: background-color 0.5s, box-shadow 0.5s;
         }
 
-        .theme-toggle-btn {
-            /* ... (Styles conservés) ... */
-        }
-        
+        /* CORRECTION MOBILE : Rétablit l'alignement et le curseur sur petit écran */
         @media (max-width: 992px) {
-            /* Assure le positionnement dans la nav bar sur mobile */
              .theme-toggle-container {
-                display: none !important; /* Cache le fixe sur mobile, on utilise celui dans la navbar */
+                display: none !important; /* Masque le bouton fixe sur mobile */
             }
              .d-lg-none .theme-toggle-btn {
                 position: static;
-                margin-right: 10px; /* Espace à côté du toggler */
+                margin-right: 10px;
             }
-            /* Rétablit le curseur par défaut sur mobile (où le custom cursor est désactivé) */
              a, button, .accordion-button, .card, .nav-link, .list-group-item, .badge, 
              .btn, .form-control, .theme-toggle-btn {
                 cursor: pointer !important;
             }
         }
 
+
         /* ======================================
         HEADER
         ====================================== */
         header {
             background: var(--header-gradient);
-            /* ... (Styles conservés) ... */
+            color: #fff;
+            text-align: center;
+            padding: 3rem 1rem 3rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+        /* ... Animation du header ... */
+
+        /* ======================================
+        TITRES DE SECTION
+        ====================================== */
+        .section-title {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 3rem;
+            font-weight: 600;
         }
 
         /* ======================================
-        CARTES ET ÉLÉMENTS INTERACTIFS - MODIFIÉ
+        CARTES ET ÉLÉMENTS INTERACTIFS
         ====================================== */
         .card {
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08), var(--card-inner-shadow); /* Ajout ombre intérieure */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08), var(--card-inner-shadow);
             background: var(--card-bg);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.5s, color 0.5s, box-shadow 0.4s;
+            margin-bottom: 2rem;
         }
         
         /* EFFET DE SURVOL GÉNÉRAL POUR LES CARTES */
@@ -150,8 +167,9 @@
         /* ACCORDION (FOND ADAPTATIF ET SURVOL) */
         .accordion-item {
             background-color: var(--card-secondary-bg);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08), var(--card-inner-shadow); /* Ajout ombre intérieure */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08), var(--card-inner-shadow);
             transition: all 0.4s ease, box-shadow 0.4s;
+            margin-bottom: 1.5rem;
         }
         .accordion-item:hover {
             transform: translateY(-3px);
@@ -164,8 +182,9 @@
         /* LIST GROUP ITEMS (FOND ADAPTATIF ET SURVOL) */
         .list-group-item {
             background: var(--card-secondary-bg);
-            box-shadow: var(--card-inner-shadow); /* Ombre intérieure subtile */
+            box-shadow: var(--card-inner-shadow);
             transition: all 0.3s ease, box-shadow 0.4s, transform 0.3s;
+            margin-bottom: 0.8rem;
         }
 
         .list-group-item:hover {
@@ -175,38 +194,47 @@
             box-shadow: var(--card-hover-shadow);
         }
         
-        /* SECTION COMPÉTENCES (Fond secondaire) */
+        /* SECTION COMPÉTENCES - CORRIGÉ ET STYLISÉ */
         .skill-category {
             background: var(--card-secondary-bg);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08), var(--card-inner-shadow); /* Ajout ombre intérieure */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08), var(--card-inner-shadow);
             transition: all 0.4s ease, box-shadow 0.4s;
+            padding: 2rem;
+            margin-bottom: 2rem; /* Espace entre les catégories dans une seule colonne */
         }
         .skill-category:hover {
             transform: translateY(-5px);
             box-shadow: var(--card-hover-shadow), var(--card-inner-shadow);
         }
-
-        /* BAQGES DE COMPÉTENCES - NOUVEL EFFET */
+        /* Correction de l'espacement entre les deux colonnes de compétences */
+        @media (min-width: 768px) {
+            #competences .row > .col-md-6:first-child .skill-category:last-child {
+                margin-bottom: 2rem;
+            }
+            #competences .row > .col-md-6:last-child .skill-category:last-child {
+                margin-bottom: 2rem; /* Assure que le conteneur principal a de l'espace en bas */
+            }
+        }
+        .skill-category h4 {
+            margin-bottom: 1.5rem;
+        }
+        .progress {
+            margin-bottom: 1.25rem;
+        }
         .badge {
-            box-shadow: var(--badge-inner-shadow); /* Ombre intérieure pour le relief */
-            transition: all 0.3s ease;
+            box-shadow: var(--badge-inner-shadow);
+            margin-right: 0.75rem;
+            margin-bottom: 0.75rem;
         }
         .badge:hover {
             transform: scale(1.1);
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
-        /* BOUTONS (Effet de pulse) - NOUVEL EFFET */
-        .btn-outline-primary, .btn-outline-danger {
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-        }
+        /* BOUTONS (Effet de pulse) */
         .btn-outline-primary:hover, .btn-outline-danger:hover {
             animation: pulse-shadow 1.5s infinite;
         }
-
-        /* Effet de lueur (pulse) pour les boutons */
         @keyframes pulse-shadow {
             0% { box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.7); }
             70% { box-shadow: 0 0 0 10px rgba(13, 110, 253, 0); }
@@ -221,18 +249,36 @@
             100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
         }
 
-
         /* ======================================
         FOOTER
         ====================================== */
         footer {
-            /* ... (Styles conservés) ... */
+            background: var(--header-gradient);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            margin-top: 3rem;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.15);
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
         }
-        
+
+
         /* ======================================
         CURSEUR PERSONNALISÉ
         ====================================== */
-        /* ... (Styles conservés) ... */
+        .custom-cursor-dot {
+            width: 10px; height: 10px; background-color: var(--cursor-color); border-radius: 50%; pointer-events: none; position: fixed; z-index: 9999; transform: translate(-50%, -50%); transition: all 0.1s ease-out;
+        }
+        .custom-cursor-dot.hover-target {
+            width: 24px; height: 4px; background-color: var(--primary-color); border-radius: 2px; transform: translate(-50%, -50%) rotate(0deg); 
+        }
+        .custom-cursor-dot.hover-target::after {
+            content: ""; position: absolute; top: 50%; left: 50%; width: 4px; height: 24px; background-color: var(--primary-color); border-radius: 2px; transform: translate(-50%, -50%);
+        }
+        .custom-cursor-dot:not(.hover-target)::after {
+            content: none;
+        }
         
     </style>
 </head>
@@ -380,7 +426,7 @@
         <section id="competences">
             <h2 class="section-title"><i class="bi bi-lightbulb-fill me-2"></i>Compétences</h2>
             <div class="row">
-                <div class="col-md-6 mb-4 mb-md-0">
+                <div class="col-md-6">
                     <div class="skill-category">
                         <h4><i class="bi bi-hdd-stack me-2"></i>Systèmes</h4>
                         <span class="badge bg-primary">Linux (Ubuntu Server)</span>
