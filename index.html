@@ -83,7 +83,6 @@
         
         section {
             padding: 4rem 1rem;
-            animation: none; /* Désactivé ici pour utiliser l'observer JS */
         }
         
         /* Animation de base pour l'intersection observer */
@@ -95,7 +94,7 @@
         .section-title {
             font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 3rem; /* Espace augmenté */
+            margin-bottom: 3rem;
             position: relative;
             padding-bottom: 1rem;
             display: inline-block;
@@ -178,24 +177,36 @@
         }
 
         /* ======================================
-        HEADER & FOOTER
+        HEADER & FOOTER - MODIFIÉ
         ====================================== */
         header {
             background: var(--header-gradient);
             padding: 5rem 2rem;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            border-bottom-left-radius: 20px; /* Ajout d'arrondi */
-            border-bottom-right-radius: 20px; /* Ajout d'arrondi */
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
         }
         
         footer {
             background: var(--header-gradient);
-            padding: 2rem;
+            color: white;
+            text-align: center;
+            padding: 1.5rem; /* RÉDUIT */
             margin-top: 4rem;
-            border-top-left-radius: 20px; /* Ajout d'arrondi */
-            border-top-right-radius: 20px; /* Ajout d'arrondi */
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
         }
         
+        /* FOOTER : Centrage du contenu */
+        footer p {
+            font-size: 0.9rem !important;
+            margin: 0 auto;
+        }
+        footer .fs-5 {
+             font-size: 1rem !important;
+        }
+
         /* ======================================
         CARTES ET ÉLÉMENTS INTERACTIFS
         ====================================== */
@@ -207,7 +218,7 @@
         }
 
         .card:hover {
-            transform: translateY(-8px) scale(1.01); /* Légèrement réduit l'échelle pour plus de fluidité */
+            transform: translateY(-8px) scale(1.01);
             box-shadow: var(--card-hover-shadow), var(--card-inner-shadow);
         }
         
@@ -217,18 +228,6 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08), var(--card-inner-shadow);
             margin-bottom: 1.5rem;
         }
-        .accordion-item:hover {
-            transform: translateY(-5px); /* Légèrement réduit le translate pour plus de fluidité */
-            box-shadow: var(--card-hover-shadow), var(--card-inner-shadow);
-        }
-        .accordion-button {
-            background-color: var(--card-secondary-bg);
-            padding: 1.25rem;
-        }
-        .accordion-body {
-            background: var(--card-bg); /* Retour au fond de carte normal pour le contenu interne */
-            padding: 1.5rem;
-        }
 
         /* LIST GROUP ITEMS */
         .list-group-item {
@@ -236,13 +235,6 @@
             box-shadow: var(--card-inner-shadow);
             margin-bottom: 1rem;
             padding: 1.25rem;
-        }
-
-        .list-group-item:hover {
-            transform: translateX(10px) scale(1.03);
-            background: var(--header-gradient);
-            color: white;
-            box-shadow: var(--card-hover-shadow);
         }
 
         /* COMPÉTENCES */
@@ -258,30 +250,28 @@
         }
         .badge {
             box-shadow: var(--badge-inner-shadow);
-            margin: 0.3rem 0.75rem 0.75rem 0; /* Ajout d'un meilleur espacement */
+            margin: 0.3rem 0.75rem 0.75rem 0;
         }
-        .progress {
-            margin-bottom: 1.5rem;
+
+        /* BARRES DE PROGRESSION - MODIFIÉ */
+        .progress-bar {
+            /* Retrait du padding-left pour centrer le texte ou le laisser géré par le conteneur */
+            padding: 0 0.5rem;
         }
-        .progress-bar::after {
-            animation: shimmer 2s infinite;
+        /* Style pour centrer le texte de la barre */
+        .progress-bar span {
+            display: block;
+            margin: 0 auto;
         }
         
         /* BOUTONS (Effet de lueur/pulse) */
-        .btn-outline-primary:hover {
-            animation: pulse-shadow 1.5s infinite;
-        }
-        .btn-outline-danger:hover {
-            animation: pulse-danger 1.5s infinite;
-        }
+        /* ... (Styles conservés pour les boutons) ... */
+
         /* Curseur personnalisé (styles inchangés) */
         .custom-cursor-dot {
             width: 12px; height: 12px; background: var(--cursor-color); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.15s ease, background 0.3s ease, width 0.3s ease, height 0.3s ease; box-shadow: 0 0 15px var(--cursor-color);
         }
-        .custom-cursor-dot.hover-target {
-            width: 40px; height: 40px; background: transparent; border: 2px solid var(--cursor-color);
-        }
-
+        
     </style>
 </head>
 <body>
@@ -448,16 +438,16 @@
                     <div class="skill-category">
                         <h4><i class="bi bi-tools me-2"></i>Outils & Expertise</h4>
                         <div class="progress">
-                            <div class="progress-bar bg-info" style="width: 90%" data-label="90%">Active Directory</div>
+                            <div class="progress-bar bg-info" style="width: 90%" data-label="Active Directory (90%)"></div>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar bg-warning" style="width: 85%" data-label="85%">GPO</div>
+                            <div class="progress-bar bg-warning" style="width: 85%" data-label="GPO (85%)"></div>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar bg-danger" style="width: 80%" data-label="80%">Maintenance</div>
+                            <div class="progress-bar bg-danger" style="width: 80%" data-label="Maintenance (80%)"></div>
                         </div>
                         <div class="progress">
-                            <div class="progress-bar bg-success" style="width: 75%" data-label="75%">Support Utilisateur</div>
+                            <div class="progress-bar bg-success" style="width: 75%" data-label="Support Utilisateur (75%)"></div>
                         </div>
                     </div>
                 </div>
@@ -516,7 +506,7 @@
     </main>
 
     <footer>
-        <p class="mb-0 fs-5">© 2025 Max Porte - CV en ligne</p>
+        <p class="mb-0">© 2025 Max Porte - CV en ligne</p>
         <p class="mt-2 opacity-75">Fait avec <i class="bi bi-heart-fill text-danger"></i></p>
     </footer>
 
@@ -591,7 +581,7 @@
             });
 
 
-            // Animation des sections au scroll (gardée)
+            // Animation des sections au scroll
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -604,13 +594,20 @@
                 observer.observe(section);
             });
 
-            // Animation des barres de progression (gardée)
+            // Animation des barres de progression - MODIFIÉ
             document.querySelectorAll('.progress-bar').forEach(bar => {
+                // Lis le nom et le pourcentage à partir de l'attribut data-label
+                const label = bar.dataset.label;
                 const width = bar.style.width;
+
+                // Initialise la barre à 0%
                 bar.style.width = '0';
+                
+                // Démarre l'animation après un délai
                 setTimeout(() => {
                     bar.style.width = width;
-                    bar.textContent = bar.dataset.label;
+                    // Injecte le texte dans la barre
+                    bar.innerHTML = `<span>${label}</span>`;
                 }, 400);
             });
 
