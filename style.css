@@ -1,5 +1,5 @@
 /* ======================================
-   VARIABLES CSS - MODE CLAIR
+   VARIABLES CSS
    ====================================== */
 :root,
 [data-bs-theme="light"] {
@@ -19,9 +19,6 @@
     --badge-inner-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* ======================================
-   VARIABLES CSS - MODE SOMBRE
-   ====================================== */
 [data-bs-theme="dark"] {
     --primary-color: #0d6efd;
     --secondary-color: #6610f2;
@@ -90,14 +87,15 @@ section {
     to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes expandWidth {
-    from { width: 0; }
-    to { width: 60%; }
-}
-
 @keyframes fadeInDown {
     from { opacity: 0; transform: translateY(-30px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+/* CORRECTION PERFORMANCE : Animation via transform (GPU) */
+@keyframes expandWidth {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
 }
 
 @keyframes shimmer {
@@ -144,11 +142,15 @@ section {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 60%;
+    width: 60%; /* Largeur fixe */
     height: 4px;
     background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
     border-radius: 2px;
-    animation: expandWidth 0.8s ease-out;
+    
+    /* CORRECTION PERFORMANCE : Animation optimisée */
+    transform-origin: left;
+    transform: scaleX(0); 
+    animation: expandWidth 0.8s ease-out forwards;
 }
 
 /* ======================================
@@ -402,6 +404,7 @@ header p {
     box-shadow: var(--card-hover-shadow), var(--card-inner-shadow);
 }
 
+.skill-category h3, 
 .skill-category h4 {
     margin-bottom: 1.5rem;
     font-weight: 700;
@@ -560,10 +563,9 @@ footer i.bi-heart-fill {
 }
 
 /* ======================================
-   STYLES POUR L'IMPRESSION (Ctrl+P)
+   IMPRESSION (Ctrl+P)
    ====================================== */
 @media print {
-    /* Cacher les éléments inutiles sur papier */
     .theme-toggle-container, 
     .custom-cursor-dot, 
     .navbar, 
@@ -573,7 +575,6 @@ footer i.bi-heart-fill {
         display: none !important; 
     }
 
-    /* Forcer le fond blanc et texte noir */
     body, .card, .accordion-item, header {
         background: white !important;
         color: black !important;
@@ -586,13 +587,11 @@ footer i.bi-heart-fill {
         color: black !important;
     }
 
-    /* Éviter de couper les sections en deux */
     section, .card {
         break-inside: avoid;
         page-break-inside: avoid;
     }
 
-    /* Afficher les liens URL en toutes lettres */
     a::after {
         content: " (" attr(href) ")";
         font-size: 0.8rem;
