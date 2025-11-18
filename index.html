@@ -4,635 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CV en ligne de Max Porte - Étudiant BTS SIO SISR, compétences en informatique, réseaux et systèmes.">
-    <meta name="keywords" content="CV, BTS SIO, Informatique, Réseaux, Linux, Windows, Cisco, Fortinet">
+    <meta name="description" content="CV en ligne de MAX . P - Étudiant BTS SIO SISR">
+    <meta name="keywords" content="CV, BTS SIO, Informatique, Réseaux">
     <meta name="author" content="Max Porte">
-    <title>CV en ligne - Max Porte</title>
+    <title>CV en ligne - MAX . P</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     
-    <style>
-        /* ======================================
-           VARIABLES CSS - MODE CLAIR
-           ====================================== */
-        :root,
-        [data-bs-theme="light"] {
-            --primary-color: #0d6efd;
-            --secondary-color: #6610f2;
-            --header-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --body-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            --card-bg: #ffffff;
-            --card-secondary-bg: #f8f9fa;
-            --text-primary: #212529;
-            --text-secondary: #6c757d;
-            --navbar-bg: rgba(255, 255, 255, 0.95);
-            --progress-bg: #e9ecef;
-            --cursor-color: #764ba2;
-            --card-hover-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            --card-inner-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
-            --badge-inner-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
-
-        /* ======================================
-           VARIABLES CSS - MODE SOMBRE
-           ====================================== */
-        [data-bs-theme="dark"] {
-            --primary-color: #0d6efd;
-            --secondary-color: #6610f2;
-            --header-gradient: linear-gradient(135deg, #4455bb 0%, #5e3a89 100%);
-            --body-bg: linear-gradient(135deg, #1a1d29 0%, #2d1b3d 100%);
-            --card-bg: #2a2e40;
-            --card-secondary-bg: #343a40;
-            --text-primary: #f8f9fa;
-            --text-secondary: #adb5bd;
-            --navbar-bg: rgba(33, 37, 41, 0.95);
-            --progress-bg: #495057;
-            --cursor-color: #9f7aea;
-            --card-hover-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            --card-inner-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-            --badge-inner-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.15);
-            --bs-body-bg: var(--body-bg);
-            --bs-body-color: var(--text-primary);
-        }
-
-        /* ======================================
-           STYLES GÉNÉRAUX & ANIMATIONS
-           ====================================== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            /* CURSEUR MODIFIÉ : On cache le curseur du body uniquement */
-            cursor: none; 
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            line-height: 1.6;
-            scroll-behavior: smooth;
-            background: var(--body-bg);
-            background-attachment: fixed;
-            min-height: 100vh;
-            color: var(--text-primary);
-            transition: background 0.5s ease, color 0.5s ease;
-            overflow-x: hidden;
-        }
-
-        /* CURSEUR MODIFIÉ : On applique le curseur personnalisé aux éléments interactifs */
-        a, button, .accordion-button, .card, .nav-link, .list-group-item,
-        .badge, .btn, .form-control, .theme-toggle-btn {
-            cursor: none !important; /* !important est gardé pour surcharger le style par défaut des éléments */
-        }
-
-        section {
-            padding: 4rem 1rem;
-        }
-
-        /* Classe pour l'animation au scroll */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .animate-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes expandWidth {
-            from { width: 0; }
-            to { width: 60%; }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        @keyframes pulse-shadow {
-            0% { box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(13, 110, 253, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(13, 110, 253, 0); }
-        }
-
-        @keyframes pulse-danger {
-            0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(220, 53, 69, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
-        }
-
-        @keyframes moveBackground {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
-
-        /* ======================================
-           TITRES DE SECTION
-           ====================================== */
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            position: relative;
-            padding-bottom: 1rem;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            border-radius: 2px;
-            animation: expandWidth 0.8s ease-out;
-        }
-
-        /* ======================================
-           BARRE DE NAVIGATION
-           ====================================== */
-        nav.navbar {
-            backdrop-filter: blur(20px) saturate(180%);
-            background-color: var(--navbar-bg) !important;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .navbar-brand {
-            font-weight: 700;
-            font-size: 1.3rem;
-            transition: transform 0.3s ease;
-        }
-
-        .navbar-brand:hover {
-            transform: scale(1.05);
-        }
-
-        .nav-link {
-            position: relative;
-            font-weight: 500;
-            padding: 0.5rem 1rem !important;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: var(--primary-color);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 80%;
-        }
-
-        /* ======================================
-           BOUTON TOGGLE THÈME
-           ====================================== */
-        .theme-toggle-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1050;
-            background-color: var(--card-bg);
-            border-radius: 50%;
-            padding: 5px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle-container:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(0,0,0,0.25);
-        }
-
-        .theme-toggle-btn {
-            background: var(--header-gradient);
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle-btn:hover {
-            transform: rotate(180deg);
-        }
-
-        /* ======================================
-           HEADER
-           ====================================== */
-        header {
-            background: var(--header-gradient);
-            padding: 5rem 2rem;
-            text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-        }
-
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: moveBackground 20s linear infinite;
-        }
-
-        header h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin: 0;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-            position: relative;
-            z-index: 1;
-            animation: fadeInDown 0.8s ease-out;
-        }
-
-        header p {
-            font-size: 1.4rem;
-            margin-top: 1rem;
-            opacity: 0.95;
-            position: relative;
-            z-index: 1;
-            animation: fadeInDown 0.8s ease-out 0.2s backwards;
-        }
-
-        /* ======================================
-           CARTES
-           ====================================== */
-        .card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08), var(--card-inner-shadow);
-            background: var(--card-bg);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-bottom: 2rem;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .card:hover::before {
-            left: 100%;
-        }
-
-        .card:hover {
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: var(--card-hover-shadow), var(--card-inner-shadow);
-        }
-
-        /* ======================================
-           ACCORDION
-           ====================================== */
-        .accordion-item {
-            background-color: var(--card-secondary-bg);
-            border: none;
-            border-radius: 15px !important;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08), var(--card-inner-shadow);
-            transition: all 0.4s ease;
-            overflow: hidden;
-        }
-
-        .accordion-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--card-hover-shadow), var(--card-inner-shadow);
-        }
-
-        .accordion-button {
-            background-color: var(--card-secondary-bg);
-            color: var(--text-primary);
-            border: none;
-            font-weight: 600;
-            padding: 1.25rem;
-            transition: all 0.3s ease;
-        }
-
-        .accordion-button:not(.collapsed) {
-            background: var(--header-gradient);
-            color: white;
-            box-shadow: none;
-        }
-
-        .accordion-button:focus {
-            box-shadow: none;
-            border: none;
-        }
-
-        .accordion-body {
-            padding: 1.5rem;
-            background: var(--card-bg);
-        }
-
-        /* ======================================
-           LIST GROUP
-           ====================================== */
-        .list-group-item {
-            background: var(--card-secondary-bg);
-            border: none;
-            border-radius: 12px !important;
-            margin-bottom: 1rem;
-            padding: 1.25rem;
-            box-shadow: var(--card-inner-shadow);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .list-group-item:hover {
-            transform: translateX(10px) scale(1.03);
-            background: var(--header-gradient);
-            color: white;
-            box-shadow: var(--card-hover-shadow);
-        }
-
-        .list-group-item:hover i {
-            transform: scale(1.2) rotate(5deg);
-        }
-
-        .list-group-item i {
-            transition: transform 0.3s ease;
-        }
-
-        /* ======================================
-           COMPÉTENCES
-           ====================================== */
-        .skill-category {
-            background: var(--card-secondary-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            margin-bottom: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08), var(--card-inner-shadow);
-            transition: all 0.4s ease;
-            min-height: 150px; /* Ajout pour harmoniser la taille */
-        }
-
-        .skill-category:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--card-hover-shadow), var(--card-inner-shadow);
-        }
-
-        .skill-category h4 {
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-            font-size: 1.3rem;
-        }
-
-        .badge {
-            padding: 0.6rem 1.2rem;
-            margin: 0.3rem 0.75rem 0.75rem 0;
-            font-size: 0.9rem;
-            font-weight: 600;
-            border-radius: 20px;
-            box-shadow: var(--badge-inner-shadow);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: inline-block;
-        }
-
-        .badge:hover {
-            transform: scale(1.15) translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-        }
-
-        /* ======================================
-           BARRES DE PROGRESSION
-           ====================================== */
-        .progress {
-            height: 35px;
-            border-radius: 20px;
-            background: var(--progress-bg);
-            margin-bottom: 1.5rem;
-            overflow: hidden;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .progress-bar {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.95rem;
-            border-radius: 20px;
-            transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            overflow: hidden;
-            padding: 0 0.5rem;
-        }
-
-        .progress-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: shimmer 2s infinite;
-        }
-
-        .progress-bar span {
-            display: block;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ======================================
-           BOUTONS
-           ====================================== */
-        .btn {
-            border-radius: 25px;
-            padding: 0.75rem 2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-            z-index: -1;
-        }
-
-        .btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .btn-outline-primary:hover {
-            animation: pulse-shadow 1.5s infinite;
-            transform: translateY(-3px);
-        }
-
-        .btn-outline-danger:hover {
-            animation: pulse-danger 1.5s infinite;
-            transform: translateY(-3px);
-        }
-
-        /* ======================================
-           FOOTER
-           ====================================== */
-        footer {
-            background: var(--header-gradient);
-            color: white;
-            text-align: center;
-            padding: 1.5rem;
-            /* margin-top: 4rem; */ /* Géré par .mt-5 sur l'élément */
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-        }
-
-        footer p {
-            font-size: 0.9rem !important;
-            margin: 0 auto;
-        }
-
-        footer .fs-5 {
-            font-size: 1rem !important;
-        }
-
-        footer i.bi-heart-fill {
-            animation: heartbeat 1.5s infinite;
-        }
-
-        /* ======================================
-           CURSEUR PERSONNALISÉ
-           ====================================== */
-        .custom-cursor-dot {
-            width: 12px;
-            height: 12px;
-            background: var(--cursor-color);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: transform 0.15s ease, background 0.3s ease, width 0.3s ease, height 0.3s ease;
-            box-shadow: 0 0 15px var(--cursor-color);
-        }
-
-        .custom-cursor-dot.hover-target {
-            width: 40px;
-            height: 40px;
-            background: transparent;
-            border: 2px solid var(--cursor-color);
-        }
-
-        /* ======================================
-           RESPONSIVE
-           ====================================== */
-        @media (max-width: 992px) {
-            .theme-toggle-container {
-                /* On ne le cache pas, il est remplacé par le bouton mobile */
-                display: none !important; 
-            }
-
-            header h1 {
-                font-size: 2.5rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            /* CURSEUR MODIFIÉ : On réactive le curseur natif sur mobile/tablette */
-            body {
-                cursor: auto;
-            }
-            
-            a, button, .accordion-button, .card, .nav-link, .list-group-item,
-            .badge, .btn, .form-control, .theme-toggle-btn {
-                cursor: pointer !important;
-            }
-
-            .custom-cursor-dot {
-                display: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            header {
-                padding: 3rem 1rem;
-            }
-
-            header h1 {
-                font-size: 2rem;
-            }
-
-            section {
-                padding: 2rem 1rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -646,14 +26,14 @@
     <div class="custom-cursor-dot"></div>
 
     <header class="mb-5">
-        <h1>Max Porte</h1>
+        <h1>MAX . P</h1>
         <p>Étudiant en BTS SIO SISR - Alternance</p>
     </header>
 
     <nav class="navbar navbar-expand-lg sticky-top shadow-sm mb-4">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <i class="bi bi-person-badge me-2" aria-hidden="true"></i>CV Max Porte
+                <i class="bi bi-person-badge me-2" aria-hidden="true"></i>CV MAX . P
             </a>
             <div class="d-flex align-items-center d-lg-none">
                 <button class="theme-toggle-btn me-2" id="theme-toggle-btn-mobile" aria-label="Changer de thème">
@@ -718,6 +98,20 @@
                     <div id="exp2Content" class="accordion-collapse collapse" data-bs-parent="#expAccordion">
                         <div class="accordion-body">
                             <div class="accordion" id="stagesAccordion">
+                                
+                                <div class="accordion-item">
+                                    <h4 class="accordion-header" id="stage0">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stage0Content">
+                                            Saint-Étienne Métropole (02/2025)
+                                        </button>
+                                    </h4>
+                                    <div id="stage0Content" class="accordion-collapse collapse" data-bs-parent="#stagesAccordion">
+                                        <div class="accordion-body">
+                                            [cite_start]<i class="bi bi-tools me-2 text-info" aria-hidden="true"></i>Déploiement, dépannage sur site, livraison et installation de matériel[cite: 25, 26].
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="accordion-item">
                                     <h4 class="accordion-header" id="stage1">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stage1Content">
@@ -726,10 +120,11 @@
                                     </h4>
                                     <div id="stage1Content" class="accordion-collapse collapse" data-bs-parent="#stagesAccordion">
                                         <div class="accordion-body">
-                                            <i class="bi bi-shield-check me-2 text-primary" aria-hidden="true"></i>Déploiement BIP, mise à jour firmware firewall Fortinet.
+                                            [cite_start]<i class="bi bi-shield-check me-2 text-primary" aria-hidden="true"></i>Déploiement BIP pompier, mise à jour firmware firewall Fortinet[cite: 27, 28].
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="accordion-item">
                                     <h4 class="accordion-header" id="stage2">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stage2Content">
@@ -738,10 +133,11 @@
                                     </h4>
                                     <div id="stage2Content" class="accordion-collapse collapse" data-bs-parent="#stagesAccordion">
                                         <div class="accordion-body">
-                                            <i class="bi bi-headset me-2 text-success" aria-hidden="true"></i>Support informatique, maintenance réseau, migration de boîtes mail.
+                                            [cite_start]<i class="bi bi-headset me-2 text-success" aria-hidden="true"></i>Support informatique, maintenance réseau, migration boîtes mail[cite: 29, 30].
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="accordion-item">
                                     <h4 class="accordion-header" id="stage3">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stage3Content">
@@ -750,10 +146,11 @@
                                     </h4>
                                     <div id="stage3Content" class="accordion-collapse collapse" data-bs-parent="#stagesAccordion">
                                         <div class="accordion-body">
-                                            <i class="bi bi-database me-2 text-warning" aria-hidden="true"></i>Création Active Directory, GPO, dossiers partagés.
+                                            [cite_start]<i class="bi bi-database me-2 text-warning" aria-hidden="true"></i>Création Active Directory (Windows Server 2019), GPO, dossiers partagés[cite: 31, 32].
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="accordion-item">
                                     <h4 class="accordion-header" id="stage4">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stage4Content">
@@ -762,10 +159,24 @@
                                     </h4>
                                     <div id="stage4Content" class="accordion-collapse collapse" data-bs-parent="#stagesAccordion">
                                         <div class="accordion-body">
-                                            <i class="bi bi-camera-video me-2 text-danger" aria-hidden="true"></i>Câblage basse tension, installation d'alarmes et vidéo surveillance.
+                                            [cite_start]<i class="bi bi-camera-video me-2 text-danger" aria-hidden="true"></i>Câblage basse tension, installation d'alarmes et vidéo surveillance[cite: 33, 35].
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="accordion-item">
+                                    <h4 class="accordion-header" id="stage5">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stage5Content">
+                                            NCS Informatique (02/2022)
+                                        </button>
+                                    </h4>
+                                    <div id="stage5Content" class="accordion-collapse collapse" data-bs-parent="#stagesAccordion">
+                                        <div class="accordion-body">
+                                            [cite_start]<i class="bi bi-pc me-2 text-secondary" aria-hidden="true"></i>Installation Windows, changement de disque dur, réparation PC/smartphone[cite: 36, 47].
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -841,18 +252,41 @@
 
         <section id="contact">
             <h2 class="section-title"><i class="bi bi-envelope-fill me-2" aria-hidden="true"></i>Contact</h2>
-            <div class="card p-4 text-center animate-on-scroll">
-                <p class="lead">N'hésitez pas à me contacter pour toute opportunité ou question.</p>
-                <div class="mt-3">
-                    <a href="mailto:email@exemple.com" class="btn btn-primary m-2">
-                        <i class="bi bi-envelope me-2" aria-hidden="true"></i>Envoyer un email
-                    </a>
-                    <a href="https://www.linkedin.com/in/max-porte-9639b2310/" class="btn btn-outline-primary m-2" target="_blank" rel="noopener noreferrer">
-                        <i class="bi bi-linkedin me-2" aria-hidden="true"></i>Mon LinkedIn
-                    </a>
-                    <a href="cv_max_porte.pdf" class="btn btn-outline-danger m-2" download>
-                        <i class="bi bi-file-earmark-pdf me-2" aria-hidden="true"></i>Télécharger mon CV
-                    </a>
+            <div class="card p-4 animate-on-scroll">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <p class="text-center lead mb-4">N'hésitez pas à me laisser un message.</p>
+                        
+                        <form action="#" method="POST">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Votre Nom</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Votre Email</label>
+                                <input type="email" class="form-control" id="email" name="_replyto" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Votre Message</label>
+                                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg mt-3">
+                                    <i class="bi bi-send-fill me-2"></i>Envoyer
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <div class="text-center mt-4">
+                            <p class="text-muted">Ou retrouvez-moi sur :</p>
+                            <a href="https://www.linkedin.com/in/max-porte-9639b2310/" class="btn btn-outline-primary m-1" target="_blank" rel="noopener noreferrer">
+                                <i class="bi bi-linkedin me-2"></i>LinkedIn
+                            </a>
+                            <a href="https://raw.githubusercontent.com/maxprte/cv_html_statique/main/Max-PORTE-FlowCV-Resume-20251022.pdf" class="btn btn-outline-danger m-1" target="_blank">
+                            <i class="bi bi-file-earmark-pdf me-2"></i>Télécharger CV
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -870,120 +304,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-
-            const THEME_KEY = 'theme-preference';
-            const ATTR_NAME = 'data-bs-theme';
-            const sunIcon = 'bi-sun-fill';
-            const moonIcon = 'bi-moon-stars-fill';
-
-            const toggleButtons = document.querySelectorAll('.theme-toggle-btn');
-            const icons = document.querySelectorAll('#theme-icon-desktop, #theme-icon-mobile');
-            const htmlElement = document.documentElement;
-
-            /**
-             * Récupère le thème préféré depuis le localStorage ou les préférences système.
-             */
-            const getPreferredTheme = () => {
-                const storedTheme = localStorage.getItem(THEME_KEY);
-                if (storedTheme) {
-                    return storedTheme;
-                }
-                // Préfère le mode sombre par défaut si aucune préférence système n'est détectée
-                return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-            };
-
-            const currentTheme = getPreferredTheme();
-
-            /**
-             * Applique le thème à l'élément HTML et met à jour les icônes.
-             * @param {string} theme - Le thème à appliquer ('light' or 'dark').
-             */
-            const applyTheme = (theme) => {
-                htmlElement.setAttribute(ATTR_NAME, theme);
-                const isDark = theme === 'dark';
-                icons.forEach(icon => {
-                    icon.classList.toggle(sunIcon, !isDark);
-                    icon.classList.toggle(moonIcon, isDark);
-                });
-                localStorage.setItem(THEME_KEY, theme);
-            };
-
-            // Appliquer le thème au chargement de la page
-            applyTheme(currentTheme);
-
-            // Gérer le clic sur les boutons de changement de thème
-            toggleButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const newTheme = htmlElement.getAttribute(ATTR_NAME) === 'dark' ? 'light' : 'dark';
-                    applyTheme(newTheme);
-                });
-            });
-
-            // --- GESTION DU CURSEUR PERSONNALISÉ ---
-
-            const cursorDot = document.querySelector('.custom-cursor-dot');
-            const hoverTargets = document.querySelectorAll('a, button, .card, .accordion-button, .nav-link, .list-group-item, .badge, .btn, .form-control, .theme-toggle-btn');
-
-            // Cacher le curseur si l'utilisateur est sur un appareil tactile (meilleure détection)
-            let isTouchDevice = false;
-            window.addEventListener('touchstart', () => {
-                isTouchDevice = true;
-                if (cursorDot) {
-                    cursorDot.style.display = 'none';
-                }
-            }, { once: true });
-
-            if (!isTouchDevice) {
-                window.addEventListener('mousemove', (e) => {
-                    if (cursorDot) {
-                        cursorDot.style.left = `${e.clientX}px`;
-                        cursorDot.style.top = `${e.clientY}px`;
-                    }
-                });
-
-                hoverTargets.forEach(target => {
-                    target.addEventListener('mouseenter', () => {
-                        if (cursorDot) {
-                            cursorDot.classList.add('hover-target');
-                        }
-                    });
-                    target.addEventListener('mouseleave', () => {
-                        if (cursorDot) {
-                            cursorDot.classList.remove('hover-target');
-                        }
-                    });
-                });
-            }
-
-
-            // --- GESTION DE L'ANIMATION AU SCROLL (Intersection Observer) ---
-            
-            const animatedElements = document.querySelectorAll('.animate-on-scroll');
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        // Optionnel : arrêter d'observer l'élément une fois animé
-                        // observer.unobserve(entry.target); 
-                    }
-                    // Optionnel : pour ré-animer en sortant et rentrant
-                    // else {
-                    //     entry.target.classList.remove('is-visible');
-                    // }
-                });
-            }, {
-                threshold: 0.1 // Déclenche quand 10% de l'élément est visible
-            });
-
-            animatedElements.forEach(el => {
-                observer.observe(el);
-            });
-
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
-
 </html>
